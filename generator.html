@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>白袍聯盟｜資源中心生產器</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#3d7a8a;--teal-dark:#2a5f6e;--gold:#c9a84c;--bg:#f0f4f5;--card:#fff;--text:#2c2c2c;--light:#6b7b80;--border:#d8e4e8;--success:#2e7d5e;--error:#c0392b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px 60px}
+.header{text-align:center;margin-bottom:36px}
+.badge{display:inline-block;background:var(--teal);color:#fff;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:2px;margin-bottom:14px}
+h1{font-family:'Noto Serif TC',serif;font-size:26px;font-weight:700;color:var(--teal-dark);margin-bottom:8px}
+h1 span{color:var(--gold)}
+.sub{font-size:13px;color:var(--light);line-height:1.7}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:36px 40px;width:100%;max-width:560px;box-shadow:0 4px 20px rgba(61,122,138,.08);margin-bottom:24px}
+.drop{border:2px dashed var(--border);border-radius:10px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;background:#f8fafb}
+.drop:hover,.drop.over{border-color:var(--teal);background:#edf6f8}
+.drop-icon{font-size:36px;margin-bottom:12px;display:block}
+.drop-title{font-size:15px;font-weight:600;color:var(--teal-dark);margin-bottom:6px}
+.drop-sub{font-size:12px;color:var(--light)}
+.drop-sub a{color:var(--teal);text-decoration:none;font-weight:500}
+#fileInput{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.status{display:none;align-items:center;gap:10px;margin-top:16px;padding:12px 16px;border-radius:8px;font-size:13px;font-weight:500}
+.status.loading{background:#e8f4f7;color:var(--teal-dark);display:flex}
+.status.success{background:#e6f4ee;color:var(--success);display:flex}
+.status.error{background:#fdecea;color:var(--error);display:flex}
+.spin{width:16px;height:16px;border:2px solid rgba(61,122,138,.3);border-top-color:var(--teal);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stats{display:none;gap:12px;margin-top:20px}
+.chip{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;text-align:center}
+.chip .num{font-family:'Noto Serif TC',serif;font-size:22px;font-weight:700;color:var(--teal-dark);display:block}
+.chip .lbl{font-size:11px;color:var(--light)}
+#dlBtn{display:none;width:100%;padding:14px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--teal-dark),var(--teal));color:#fff;font-size:15px;font-weight:600;font-family:'Noto Sans TC',sans-serif;cursor:pointer;margin-top:20px;letter-spacing:.5px}
+#dlBtn:hover{opacity:.9}
+.info{width:100%;max-width:560px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 28px}
+.info h3{font-size:13px;font-weight:600;color:var(--teal-dark);margin-bottom:14px}
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.snum{width:22px;height:22px;background:var(--teal);color:#fff;font-size:11px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.stxt{font-size:13px;color:#555;line-height:1.6}
+.stxt strong{color:var(--text)}
+.colmap{margin-top:16px;background:#f8fafb;border-radius:8px;padding:14px 16px;font-size:12px;color:#666;line-height:1.8}
+.colmap strong{color:var(--teal-dark)}
+.fnote{margin-top:24px;font-size:11px;color:#aaa;text-align:center}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="badge">White Coat Alliance</div>
+  <h1>代言與業配資源中心<br><span>Excel 生產器</span></h1>
+  <p class="sub">上傳最新 Google 表單匯出的 Excel 檔案<br>自動生成含密碼保護的醫師名錄頁面</p>
+</div>
+<div class="card">
+  <div class="drop" id="drop">
+    <input type="file" id="fileInput" accept=".xlsx,.xls">
+    <span class="drop-icon">📊</span>
+    <div class="drop-title">拖曳 Excel 檔案至此</div>
+    <div class="drop-sub">或 <a>點此選擇檔案</a>，支援 .xlsx / .xls</div>
+  </div>
+  <div class="status" id="status">
+    <div class="spin" id="spin"></div>
+    <span id="statusTxt">讀取中...</span>
+  </div>
+  <div class="stats" id="stats">
+    <div class="chip"><span class="num" id="sDoc">0</span><span class="lbl">位醫師</span></div>
+    <div class="chip"><span class="num" id="sSpec">0</span><span class="lbl">個科別</span></div>
+    <div class="chip"><span class="num" id="sCard">0</span><span class="lbl">有電子名片</span></div>
+  </div>
+  <button id="dlBtn" onclick="doDownload()">⬇ 下載更新後的醫師名錄頁面</button>
+</div>
+<div class="info">
+  <h3>📋 使用說明</h3>
+  <div class="step"><div class="snum">1</div><div class="stxt">從 Google 表單後台匯出最新回覆為 <strong>.xlsx</strong> 格式</div></div>
+  <div class="step"><div class="snum">2</div><div class="stxt">將檔案拖曳到上方，或點擊選擇</div></div>
+  <div class="step"><div class="snum">3</div><div class="stxt">確認醫師數量後點擊下載</div></div>
+  <div class="step"><div class="snum">4</div><div class="stxt">將下載的 <strong>index.html</strong> 上傳到 GitHub 覆蓋即可</div></div>
+  <div class="colmap">
+    <strong>存取密碼：</strong>drchang.ent33<br><br>
+    <strong>欄位對應：</strong><br>
+    A 時間戳記 ｜ B 姓名 ｜ C 科別 ｜ D 服務單位 ｜ E 職稱<br>
+    F Facebook ｜ G Instagram ｜ H 其他媒體 ｜ I 電子名片<br>
+    J 可接受合作項目 ｜ K 期待合作品牌 ｜ L 自我介紹
+  </div>
+</div>
+<div class="fnote">此工具完全在瀏覽器端運行，不會上傳任何資料至伺服器。</div>
+
+<script>
+var SPEC_MAP = {
+  '耳鼻喉科':['耳鼻喉科','耳鼻喉','ENT','耳鼻喉科、航空醫學專科','耳鼻喉科、小兒科雙專科、醫美工作經驗'],
+  '小兒科':['小兒科','兒科','兒科/感染科','小兒科/神經科/心臟科/新陳代謝/科泌尿科','小兒遺傳與新陳代謝科'],
+  '皮膚科':['皮膚科','醫美','一般科醫美','新陳代謝糖尿病，減重，醫美皮膚','皮膚科／醫美'],
+  '家庭醫學科':['家庭醫學科','家醫科','環境醫學/職業醫學/航空醫學/家醫'],
+  '中醫科':['中醫','中醫科','中醫師'],
+  '牙科':['牙科','牙醫','齒顎矯正專科'],
+  '新陳代謝／內分泌科':['專業內科、新陳代謝科、內分泌科。','內分泌','內科、內分泌新陳代謝科','兒童成長/減重專科','兒童內分泌科','兒童內分泌科、兒童成長專科'],
+  '婦產科':['婦產科','婦產科/抗衰老','婦產科 功能醫學'],
+  '泌尿科':['泌尿科','外科, 泌尿科'],
+  '消化內科':['消化內科','腸胃科/肥胖專科/內視鏡專科','肝膽胃腸科/減重專科/功能醫學'],
+  '復健／骨科':['骨科','復健科','側彎專科','物理治療（成人與兒童、青少年脊椎側彎專科）'],
+  '胸腔內科':['胸腔內科','胸腔內科/呼吸道治療'],
+  '身心科':['身心科'],'藥師':['藥師'],'整形外科':['整形外科'],
+  '心臟血管外科':['心臟血管外科'],'神經科':['神經科','神經外科'],
+  '放射腫瘤科':['放射腫瘤科'],'腎臟科':['腎臟科'],'眼科':['眼科'],
+  '急診科':['急診專科','急診'],'高齡醫學科':['高齡醫學科']
+};
+var SPEC_ORDER = Object.keys(SPEC_MAP);
+var parsed = null;
+
+function normSpec(v){
+  v=(v||'').trim();
+  for(var k in SPEC_MAP){if(SPEC_MAP[k].some(function(x){return v===x||v.indexOf(x)===0}))return k;}
+  return v||'其他';
+}
+function clean(v){
+  if(v===null||v===undefined)return'';
+  var s=String(v).trim();
+  return['nan','NaN','undefined','null','無','没有','沒有','沒有耶','暫無','N/A','none','None','無連結'].indexOf(s)>=0?'':s;
+}
+function isUrl(v){return typeof v==='string'&&v.indexOf('http')===0&&v.length>10;}
+
+function parseXL(buf){
+  var wb=XLSX.read(new Uint8Array(buf),{type:'array',raw:false});
+  var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:''});
+  var out=[];
+  for(var i=1;i<rows.length;i++){
+    var r=rows[i];
+    var name=clean(r[1]);
+    if(!name)continue;
+    var fb=clean(r[5]),ig=clean(r[6]),om=clean(r[7]),card=clean(r[8]);
+    out.push({name:name,specialty:normSpec(clean(r[2])),hospital:clean(r[3]),title:clean(r[4]),
+      bio:clean(r[11]),collab:clean(r[9]),dream_brand:clean(r[10]),
+      fb:isUrl(fb)?fb:'',ig:isUrl(ig)?ig:'',other_media:isUrl(om)?om:'',card_url:isUrl(card)?card:''});
+  }
+  return out;
+}
+
+var drop=document.getElementById('drop');
+var fi=document.getElementById('fileInput');
+drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('over');});
+drop.addEventListener('dragleave',function(){drop.classList.remove('over');});
+drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('over');if(e.dataTransfer.files[0])go(e.dataTransfer.files[0]);});
+fi.addEventListener('change',function(e){if(e.target.files[0])go(e.target.files[0]);});
+
+function setS(type,msg){
+  var el=document.getElementById('status');
+  el.className='status '+type;el.style.display='flex';
+  document.getElementById('statusTxt').textContent=msg;
+  document.getElementById('spin').style.display=type==='loading'?'block':'none';
+}
+
+function go(file){
+  if(!file.name.match(/\.xlsx?$/i)){setS('error','請上傳 .xlsx 格式');return;}
+  setS('loading','讀取中...');
+  document.getElementById('stats').style.display='none';
+  document.getElementById('dlBtn').style.display='none';
+  var fr=new FileReader();
+  fr.onload=function(e){
+    try{
+      var docs=parseXL(e.target.result);
+      if(!docs.length){setS('error','找不到資料，請確認格式');return;}
+      parsed=docs;
+      var specs=new Set(docs.map(function(d){return d.specialty;})).size;
+      document.getElementById('sDoc').textContent=docs.length;
+      document.getElementById('sSpec').textContent=specs;
+      document.getElementById('sCard').textContent=docs.filter(function(d){return d.card_url;}).length;
+      document.getElementById('stats').style.display='flex';
+      setS('success','✓ 成功讀取 '+docs.length+' 位醫師');
+      document.getElementById('dlBtn').style.display='block';
+    }catch(err){setS('error','解析失敗：'+err.message);}
+  };
+  fr.readAsArrayBuffer(file);
+}
+
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function buildOutput(docs){
+  var dj=JSON.stringify(docs);
+  var total=docs.length;
+  var sc=new Set(docs.map(function(d){return d.specialty;})).size;
+
+  var pwScript='<scr'+'ipt>\n'
+    +'var PW="drchang.ent33";\n'
+    +'function doPwCheck(){\n'
+    +'  var v=document.getElementById("pwInput").value;\n'
+    +'  if(v===PW){document.getElementById("lockScreen").style.display="none";document.body.style.overflow="auto";}\n'
+    +'  else{document.getElementById("pwError").textContent="密碼錯誤，請再試一次";document.getElementById("pwInput").style.outline="2px solid #c0392b";setTimeout(function(){document.getElementById("pwInput").style.outline="";document.getElementById("pwError").textContent="";},2000);}\n'
+    +'}\n'
+    +'function togglePw(){\n'
+    +'  var i=document.getElementById("pwInput"),b=document.getElementById("eyeBtn");\n'
+    +'  if(i.type==="password"){i.type="text";b.textContent="🙈";}else{i.type="password";b.textContent="👁";}\n'
+    +'}\n'
+    +'<'+'/script>';
+
+  var mainScript='<scr'+'ipt>\n'
+    +'var DOCTORS='+dj+';\n'
+    +'var SPEC_ORDER=["耳鼻喉科","中醫科","皮膚科","小兒科","家庭醫學科","新陳代謝／內分泌科","復健／骨科","牙科","婦產科","泌尿科","消化內科","胸腔內科","整形外科","神經科","身心科","藥師","心臟血管外科","放射腫瘤科","腎臟科","眼科","急診科","高齡醫學科"];\n'
+    +'var af="全部",sq="";\n'
+    +'function cnt(){var c={};DOCTORS.forEach(function(d){c[d.specialty]=(c[d.specialty]||0)+1;});return c;}\n'
+    +'function bf(){var counts=cnt();var specs=["全部"].concat(SPEC_ORDER.filter(function(s){return counts[s];}));document.getElementById("filterTags").innerHTML=specs.map(function(s){var n=s==="全部"?DOCTORS.length:counts[s];return\'<button class="ft\'+(s===af?\' active\':\'\')+\'" onclick="sf(\\\'\'+ s+\'\\\')">\'+s+\'<span class="fc">\'+n+"</span></button>";}).join("");}\n'
+    +'function sf(s){af=s;bf();render();}\n'
+    +'function esc(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}\n'
+    +'function rc(d){var so=[d.fb?"<a href=\\""+esc(d.fb)+"\\" target=\\"_blank\\" class=\\"sb\\">🔵 Facebook</a>":"",d.ig?"<a href=\\""+esc(d.ig)+"\\" target=\\"_blank\\" class=\\"sb\\">📸 Instagram</a>":"",d.other_media?"<a href=\\""+esc(d.other_media)+"\\" target=\\"_blank\\" class=\\"sb\\">🔗 其他媒體</a>":"",d.card_url?"<a href=\\""+esc(d.card_url)+"\\" target=\\"_blank\\" class=\\"cb\\">📇 電子名片</a>":""].filter(Boolean).join("");return\'<div class="dc"><div class="dn">\'+esc(d.name)+\'<span>醫師</span></div><div class="st">\'+esc(d.specialty)+"</div>"+(d.hospital?\'<div class="dh">\'+esc(d.hospital)+"</div>":"")+(d.title?\'<div class="dt">\'+esc(d.title)+"</div>":"")+(d.bio?\'<div class="dv"></div><div class="db">\'+esc(d.bio)+"</div>":"")+(d.collab?\'<div class="cs"><div class="cl">可接受合作項目</div><div class="ct">\'+esc(d.collab)+"</div></div>":"")+(d.dream_brand?\'<div class="cs"><div class="cl dr">期待合作品牌</div><div class="ct">\'+esc(d.dream_brand)+"</div></div>":"")+(so?\'<div class="cf">\'+so+"</div>":"")+"</div>";}\n'
+    +'function gf(){return DOCTORS.filter(function(d){if(af!=="全部"&&d.specialty!==af)return false;if(!sq)return true;var q=sq.toLowerCase();return[d.name,d.specialty,d.hospital,d.title,d.bio,d.collab,d.dream_brand].some(function(v){return(v||"").toLowerCase().indexOf(q)>=0;});});}\n'
+    +'function render(){var f=gf();var c=document.getElementById("dl");if(!f.length){c.innerHTML=\'<div style="text-align:center;padding:60px;color:#888">找不到符合條件的醫師</div>\';return;}if(af==="全部"&&!sq){var g={};SPEC_ORDER.forEach(function(s){g[s]=[];});f.forEach(function(d){if(!g[d.specialty])g[d.specialty]=[];g[d.specialty].push(d);});c.innerHTML=SPEC_ORDER.filter(function(s){return g[s]&&g[s].length;}).map(function(s){return\'<div class="ss"><div class="sh"><h2>\'+s+"</h2><span>"+g[s].length+\' 位醫師</span></div><div class="dg">\'+g[s].map(rc).join("")+"</div></div>";}).join("");}else{c.innerHTML=\'<div class="ss"><div class="sh"><h2>\'+(af==="全部"?"搜尋結果":af)+"</h2><span>"+f.length+\' 位醫師</span></div><div class="dg">\'+f.map(rc).join("")+"</div></div>";}}\n'
+    +'document.getElementById("si").addEventListener("input",function(e){sq=e.target.value.trim();render();});\n'
+    +'bf();render();\n'
+    +'<'+'/script>';
+
+  return '<!DOCTYPE html>\n<html lang="zh-TW">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>白袍聯盟｜代言與業配資源中心</title>\n'
+    +'<link rel="preconnect" href="https://fonts.googleapis.com">\n'
+    +'<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">\n'
+    +pwScript+'\n'
+    +'<style>\n'
+    +':root{--t:#3d7a8a;--td:#2a5f6e;--tl:#5a9daf;--g:#c9a84c;--gl:#e6c97a;--bg:#f7f5f1;--c:#fff;--tx:#2c2c2c;--lt:#6b6b6b;--bd:#e0d8cc;--tb:#e8f4f7;--tt:#2a6b7c}\n'
+    +'*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Noto Sans TC",sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow:hidden}\n'
+    +'#lockScreen{position:fixed;inset:0;background:linear-gradient(135deg,#2a5f6e,#3d7a8a);display:flex;align-items:center;justify-content:center;z-index:9999}\n'
+    +'.lb{background:#fff;border-radius:16px;padding:48px 40px;width:100%;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25)}\n'
+    +'.li{font-size:40px;margin-bottom:16px}.lt{font-family:"Noto Serif TC",serif;font-size:20px;font-weight:700;color:#2a5f6e;margin-bottom:6px}.ls{font-size:13px;color:#888;margin-bottom:24px}\n'
+    +'.pw{position:relative;margin-bottom:12px}.pw input{width:100%;padding:13px 46px 13px 16px;border:1.5px solid #d8e4e8;border-radius:8px;font-size:15px;font-family:"Noto Sans TC",sans-serif;outline:none;letter-spacing:1px;transition:border-color .2s}.pw input:focus{border-color:#3d7a8a}.pw button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;padding:0}\n'
+    +'.lbtn{width:100%;padding:13px;border:none;border-radius:8px;background:linear-gradient(135deg,#2a5f6e,#3d7a8a);color:#fff;font-size:15px;font-weight:600;font-family:"Noto Sans TC",sans-serif;cursor:pointer}.le{font-size:12px;color:#c0392b;margin-top:10px;min-height:18px}\n'
+    +'.hero{background:linear-gradient(135deg,#2a5f6e 0%,#3d7a8a 40%,#5a9daf 100%);position:relative;overflow:hidden;padding:60px 5% 50px}\n'
+    +'.hero::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.04\'%3E%3Ccircle cx=\'30\' cy=\'30\' r=\'20\'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}\n'
+    +'.hero h1{font-family:"Noto Serif TC",serif;color:#fff;font-size:clamp(28px,5vw,48px);font-weight:700;line-height:1.25;margin-bottom:20px}.hero h1 span{color:var(--gl)}\n'
+    +'.hl{display:inline-block;background:rgba(201,168,76,.85);color:#fff;font-size:11px;font-weight:600;letter-spacing:2px;padding:5px 14px;border-radius:2px;margin-bottom:22px;text-transform:uppercase}\n'
+    +'.hd{color:rgba(255,255,255,.82);font-size:15px;line-height:1.8;max-width:620px;margin-bottom:36px}\n'
+    +'.hs{display:flex;gap:32px;flex-wrap:wrap;margin-bottom:36px}.sv{display:flex;flex-direction:column;border-left:2px solid var(--g);padding-left:14px}.sn{font-family:"Noto Serif TC",serif;font-size:32px;font-weight:700;color:#fff;line-height:1}.sl{font-size:12px;color:rgba(255,255,255,.7);margin-top:4px}\n'
+    +'.nb{background:rgba(245,240,232,.95);border-left:4px solid var(--g);padding:18px 22px;border-radius:4px;max-width:720px}.nb strong{color:#2a5f6e;font-size:13px;display:block;margin-bottom:6px}.nb p{font-size:13px;color:#5a5a5a;line-height:1.7}.nb a{color:var(--t);font-weight:600;text-decoration:none}\n'
+    +'.main{max-width:1200px;margin:0 auto;padding:40px 5% 60px}\n'
+    +'.sw{position:relative;margin-bottom:20px}.sw svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#999}\n'
+    +'#si{width:100%;padding:14px 18px 14px 46px;border:1.5px solid var(--bd);border-radius:8px;font-size:14px;font-family:"Noto Sans TC",sans-serif;background:#fff;color:var(--tx);outline:none;transition:border-color .2s;margin-bottom:20px}#si:focus{border-color:var(--t)}#si::placeholder{color:#bbb}\n'
+    +'#filterTags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}\n'
+    +'.ft{padding:6px 14px;border-radius:20px;border:1.5px solid var(--bd);background:#fff;font-size:13px;color:var(--lt);cursor:pointer;transition:all .2s;white-space:nowrap;font-family:"Noto Sans TC",sans-serif}.ft:hover{border-color:var(--tl);color:var(--t)}.ft.active{background:var(--t);border-color:var(--t);color:#fff;font-weight:500}.fc{display:inline-block;margin-left:5px;font-size:11px;opacity:.8}\n'
+    +'.ss{margin-bottom:44px}.sh{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--g)}.sh h2{font-family:"Noto Serif TC",serif;font-size:20px;font-weight:700;color:#2a5f6e}.sh span{font-size:13px;color:var(--lt)}\n'
+    +'.dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}\n'
+    +'.dc{background:var(--c);border:1px solid var(--bd);border-radius:10px;padding:24px;transition:box-shadow .25s,transform .2s;position:relative;overflow:hidden}.dc::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--t),var(--tl));opacity:0;transition:opacity .2s}.dc:hover{box-shadow:0 6px 24px rgba(61,122,138,.14);transform:translateY(-2px)}.dc:hover::before{opacity:1}\n'
+    +'.dn{font-family:"Noto Serif TC",serif;font-size:18px;font-weight:700;color:var(--tx);margin-bottom:6px}.dn span{font-size:12px;font-weight:400;color:var(--lt);font-family:"Noto Sans TC",sans-serif;margin-left:4px}\n'
+    +'.st{display:inline-block;background:var(--tb);color:var(--tt);font-size:11px;font-weight:500;padding:3px 10px;border-radius:12px;margin-bottom:8px}.dh{font-size:13px;color:var(--lt);margin-bottom:2px}.dt{font-size:12px;color:#999}.dv{height:1px;background:var(--bd);margin:14px 0}.db{font-size:13px;color:#555;line-height:1.7;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:14px}\n'
+    +'.cs{margin-bottom:10px}.cl{font-size:11px;font-weight:600;color:var(--g);letter-spacing:.5px;margin-bottom:4px;text-transform:uppercase}.cl.dr{color:var(--t)}.ct{font-size:12px;color:#666;line-height:1.6}\n'
+    +'.cf{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}.sb{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:6px;border:1px solid var(--bd);font-size:12px;color:var(--lt);text-decoration:none;transition:all .2s;font-family:"Noto Sans TC",sans-serif;background:#fafafa}.sb:hover{border-color:var(--t);color:var(--t);background:var(--tb)}.cb{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;background:var(--g);color:#fff;font-size:12px;font-weight:600;text-decoration:none;transition:background .2s}.cb:hover{background:#b8943e}\n'
+    +'@media(max-width:600px){.hero{padding:40px 5% 36px}.hs{gap:20px}.dg{grid-template-columns:1fr}}\n'
+    +'</style>\n'
+    +'</head>\n<body>\n'
+    +'<div id="lockScreen"><div class="lb"><div class="li">🔐</div><div class="lt">白袍聯盟資源中心</div><div class="ls">請輸入存取密碼</div><div class="pw"><input type="password" id="pwInput" placeholder="請輸入密碼" onkeydown="if(event.key===\'Enter\')doPwCheck()"><button id="eyeBtn" onclick="togglePw()">👁</button></div><button class="lbtn" onclick="doPwCheck()">進入</button><div class="le" id="pwError"></div></div></div>\n'
+    +'<div class="hero"><div class="hl">Doctor Alliance × Brand Collaboration</div><h1>白袍聯盟<br><span>代言與業配</span>資源中心</h1><p class="hd">白袍人生學院旗下專業醫師資源整合平台。提供醫師背景、自媒體連結、合作意願與品牌偏好，協助廠商精準媒合，建立長期信任的醫師代言與業配合作關係。</p><div class="hs"><div class="sv"><span class="sn">'+total+'</span><span class="sl">合作醫師</span></div><div class="sv"><span class="sn">'+sc+'</span><span class="sl">專業科別</span></div><div class="sv"><span class="sn">100%</span><span class="sl">皆為臨床執業醫師</span></div></div><div class="nb"><strong>廠商合作說明</strong><p>本資源中心為白袍人生學院內部成員自願加入的代言與業配資源整合。<a href="#">所有合作洽談請統一透過白袍人生學院窗口聯繫</a>，由學院協助轉介與媒合，以保障雙方權益並提升媒合效率。</p></div></div>\n'
+    +'<div class="main"><div class="sw"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" id="si" placeholder="搜尋醫師姓名、服務單位、合作項目或關鍵字..."></div><div id="filterTags"></div><div id="dl"></div></div>\n'
+    +mainScript+'\n'
+    +'</body>\n</html>';
+}
+
+function doDownload(){
+  if(!parsed)return;
+  var html=buildOutput(parsed);
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='index.html';a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
