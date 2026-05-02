@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>白袍聯盟｜代言與業配資源中心</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal: #2a7d7b;
+  --teal-dark: #1e5f5d;
+  --teal-light: #3a9997;
+  --gold: #c49a2e;
+  --gold-light: #d4a93a;
+  --bg: #f5f2ed;
+  --white: #ffffff;
+  --text: #1a1a1a;
+  --text-mid: #444;
+  --text-soft: #666;
+  --text-muted: #999;
+  --border: #e2ddd7;
+  --border-light: #ede9e3;
+  --tag-bg: #e8f4f4;
+  --tag-color: #2a7d7b;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-hover: 0 6px 24px rgba(0,0,0,0.13);
+}
+
+html { overflow-x: hidden; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans TC', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #1e6665 0%, #2a8c8a 40%, #3aa8a5 70%, #4dbdb9 100%);
+  padding: 72px 5% 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(255,255,255,0.06) 0%, transparent 60%);
+}
+.hero-badge {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.45);
+  border-radius: 4px;
+  padding: 5px 16px;
+  font-size: 11.5px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+.hero h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(36px, 5.5vw, 72px);
+  line-height: 1.15;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.hero h1 em {
+  color: #e8c84a;
+  font-style: normal;
+}
+.hero-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.82);
+  max-width: 600px;
+  margin-bottom: 44px;
+  font-weight: 300;
+}
+.hero-stats {
+  display: flex;
+  gap: 0;
+  margin-bottom: 44px;
+}
+.stat {
+  padding-right: 32px;
+  margin-right: 32px;
+  border-right: 1px solid rgba(255,255,255,0.3);
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.5px;
+}
+.hero-notice {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 8px;
+  padding: 16px 24px;
+  max-width: 640px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.85);
+}
+.hero-notice strong { color: #fff; }
+.hero-notice a { color: #e8d06a; text-decoration: underline; }
+
+/* ── FILTER BAR ── */
+.filter-section {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.search-row {
+  margin-bottom: 16px;
+}
+.search-box {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+}
+.search-box svg { color: var(--text-muted); flex-shrink:0; }
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+}
+.search-box input::placeholder { color: var(--text-muted); }
+.filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ftag {
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-soft);
+  font-size: 13px;
+  font-family: 'Noto Sans TC', sans-serif;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+.ftag:hover { border-color: var(--teal); color: var(--teal); }
+.ftag.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ── CONTENT ── */
+.content { padding: 0 5% 60px; }
+
+.dept-block { padding-top: 48px; }
+
+.dept-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--teal);
+}
+.dept-heading h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--teal-dark);
+}
+.dept-heading .dept-cnt {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+/* ── DOCTOR CARD ── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.22s, transform 0.22s;
+  position: relative;
+  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.card-nameblock { flex:1; min-width:0; }
+.card-name {
+  font-family: 'Microsoft JhengHei', '微軟正黑體', 'PingFang TC', 'Noto Sans TC', sans-serif;
+  font-size: clamp(28px, 6vw, 40px);
+  font-weight: 900;
+  color: #3a7d7b;
+  margin-right: 8px;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+.card-role-badge {
+  font-size: 13px;
+  color: #c8d0d4;
+  font-weight: 300;
+  letter-spacing: 2px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+.dept-tag {
+  display: inline-block;
+  background: var(--tag-bg);
+  color: var(--tag-color);
+  font-size: 12px;
+  padding: 3px 12px;
+  border-radius: 4px;
+  margin-top: 8px;
+  font-weight: 500;
+}
+.card-unit {
+  font-size: 14px;
+  color: var(--text);
+  margin-top: 14px;
+  font-weight: 500;
+}
+.card-title-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+hr.card-divider {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 16px 0;
+}
+.card-bio {
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: var(--text-mid);
+  margin-bottom: 18px;
+  border-left: 3px solid var(--teal-light);
+  padding-left: 14px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.field-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 5px;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.field-label::before {
+  content: "•";
+  font-size: 14px;
+  line-height: 1;
+}
+.field-value {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+.dream-value {
+  font-size: 13px;
+  color: var(--gold);
+  line-height: 1.65;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+/* ── LINK BUTTONS ── */
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+}
+.lbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-family: 'Noto Sans TC', sans-serif;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  background: transparent;
+  transition: all 0.18s;
+  cursor: pointer;
+}
+.lbtn:hover { border-color: #aaa; color: var(--text); background: var(--bg); }
+.lbtn.fb:hover { border-color: #4267B2; color: #4267B2; }
+.lbtn.ig:hover { border-color: #E1306C; color: #E1306C; }
+.lbtn.card-lbtn {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+  font-weight: 500;
+}
+.lbtn.card-lbtn:hover { background: var(--gold-light); border-color: var(--gold-light); }
+.lbtn.other:hover { border-color: var(--teal); color: var(--teal); }
+
+/* empty */
+.no-result { display: none; text-align:center; padding: 80px; color: var(--text-muted); }
+.no-result.show { display:block; }
+
+footer {
+  text-align: center;
+  padding: 36px;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--text-muted);
+  background: var(--white);
+}
+footer strong { color: var(--teal); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  /* Hero */
+  .hero { padding: 40px 5% 48px; }
+  .hero h1 { font-size: clamp(30px, 8vw, 48px); }
+  .hero-desc { font-size: 14px; margin-bottom: 32px; }
+  .hero-stats { gap: 0; flex-wrap: nowrap; }
+  .stat { padding-right: 20px; margin-right: 20px; }
+  .stat-num { font-size: 36px; }
+  .hero-notice { font-size: 13px; padding: 14px 18px; }
+
+  /* Filter bar — sticky with scroll */
+  .filter-section { padding: 14px 4% 14px; }
+  .search-box { max-width: 100%; }
+  .search-row { margin-bottom: 12px; }
+
+  /* Filter tags: wrap on mobile */
+  .filter-tags {
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .ftag { font-size: 12.5px; padding: 5px 14px; }
+
+  /* Cards */
+  .content { padding: 0 4% 48px; }
+  .cards-grid { grid-template-columns: 1fr; gap: 14px; }
+  .dept-block { padding-top: 36px; }
+  .dept-heading h2 { font-size: 18px; }
+
+  /* Card internals */
+  .card { padding: 18px 16px; }
+  .card-name { font-size: 16px; }
+  .card-bio { -webkit-line-clamp: 3; font-size: 12.5px; }
+  .field-label { font-size: 11px; }
+  .field-value, .dream-value { font-size: 12px; }
+  .lbtn { font-size: 12px; padding: 5px 11px; }
+
+  /* Footer */
+  footer { padding: 24px 5%; font-size: 12px; }
+}
+
+@media (max-width: 400px) {
+  .hero-stats { gap: 0; }
+  .stat { padding-right: 14px; margin-right: 14px; }
+  .stat-num { font-size: 30px; }
+  .stat-label { font-size: 11px; }
+  .hero-badge { font-size: 10px; letter-spacing: 1.5px; }
+  .card-links { gap: 6px; }
+  .lbtn { padding: 5px 10px; font-size: 11.5px; }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-badge">Doctor Alliance × Brand Collaboration</div>
+  <h1>白袍聯盟<br><em>代言與業配</em>資源中心</h1>
+  <p class="hero-desc">白袍人生學院旗下專業醫師資源整合平台。提供醫師背景、自媒體連結、合作意願與品牌偏好，協助廠商精準媒合，建立長期信任的醫師代言與業配合作關係。</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">106</div><div class="stat-label">合作醫師</div></div>
+    <div class="stat"><div class="stat-num">22</div><div class="stat-label">專業科別</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">皆為臨床執業醫師</div></div>
+  </div>
+  <div class="hero-notice">
+    <strong>廠商合作說明</strong><br>
+    本資源中心為白袍人生學院內部成員自願加入的代言與業配資源整合。<a href="#">所有合作洽談請統一透過白袍人生學院窗口聯繫</a>，由學院協助轉介與媒合，以保障雙方權益並提升媒合效率。
+  </div>
+</section>
+
+<div class="filter-section">
+  <div class="search-row">
+    <div class="search-box">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="搜尋醫師姓名、服務單位、合作項目或關鍵字...">
+    </div>
+  </div>
+  <div class="filter-tags" id="filterTags"></div>
+</div>
+
+<div class="content" id="mainContent"></div>
+<div class="no-result" id="noResult"><h3>找不到符合的醫師</h3><p>請嘗試其他關鍵字</p></div>
+
+<footer>
+  <strong>白袍人生學院</strong> White Coat Life Academy<br>
+  代言與業配資源中心 · 廠商洽談請透過學院窗口聯繫
+</footer>
+
+<script>
+const DOCTORS = [
+  {
+    name:"楊仲豪",
+    dept:"身心科",
+    group:"身心科",
+    unit:"暖陽身心診所",
+    title:"負責人",
+    bio:"身心科醫師，目前經營診所，有多次上節目和自媒體的經驗，口才和分析能力我的優勢，有兩個可愛小孩也能協助入鏡！",
+    products:"身心科相關產品（睡眠、情緒），親子產品（保健食品、教材），書籍",
+    dream:"大廠牌都都很讚，高流量的Influncer也都可以",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"簡詩敏",
+    dept:"藥師",
+    group:"藥師",
+    unit:"九八新聞台",
+    title:"節目主持人/製作人",
+    bio:"簡詩敏|藥理詩詩 \n專業藥師、廣播節目主持人、Podcaster、爵士創作歌手。\n自在悠遊於「音樂藝術」與「醫藥科學」之間，熱愛自然人文、享受生命、創作力豐沛。並以背包客之姿，慢行世界超過50個以上城市。\n中國醫藥大學藥學系畢業後，於美國紐約、荷蘭、比利時深造爵士演唱。\n目前為媒體製作人、主持人。並活躍於亞洲各國爵士場域與音樂節。",
+    products:"藥品/保健食品(有小綠人)/醫美/保養品/醫材/女性用品/健身/3C/家電",
+    dream:"精品/設計師品牌服飾/音響耳機國際大牌如：鐵三角、Neumann",
+    fb:"https://www.facebook.com/immimijasmine?mibextid=LQQJ4d",
+    ig:"https://www.instagram.com/notonlypharmacy?igsh=MTVidW42bTNkbWlqcA%3D%3D&utm_source=qr",
+    other:"https://open.firstory.me/user/notonlypharmacy/platforms",
+    card:"https://notonlypharmacy.cc/"
+  },
+  {
+    name:"唐子涵",
+    dept:"兒科",
+    group:"小兒科",
+    unit:"禾馨",
+    title:"主治醫師",
+    bio:"我是愛吃美食又愛美的兒科跟醫美醫師，最近晉升新手媽媽，主要分享健康新知、育兒衛教及美食旅遊跟大家一起守護兒童健康喔～",
+    products:"親子產品可、不團購",
+    dream:"精品、化妝品、奶粉都可",
+    fb:"https://www.facebook.com/drtangtzuhan?mibextid=kFxxJD",
+    ig:"https://www.instagram.com/tzuhan_tang?igsh=bmd4YXgwMDl0MXdj&utm_source=qr",
+    other:"",
+    card:""
+  },
+  {
+    name:"謝怡君",
+    dept:"環境醫學/職業醫學/航空醫學/家醫",
+    group:"家庭醫學科",
+    unit:"臺北產業醫診所",
+    title:"院長",
+    bio:"非常少見冷門環境職業醫學專科專科，近年參與家庭醫學診所執業，過程中激發出推薦好的產品給他人的熱情及業務潛能。",
+    products:"葉黃素精華凍/保健食品類 /親子產品",
+    dream:"空氣清淨機/人體工學設備桌椅/防護用具（眼鏡/口罩）",
+    fb:"https://m.facebook.com/taipei101clinic",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"艾莉絲",
+    dept:"中醫科",
+    group:"中醫科",
+    unit:"潤中醫診所",
+    title:"院長",
+    bio:"你好，我是中醫皮膚科專科醫師、中醫美容醫學會理事、健康2.0專欄作家，也是很多爆款文章、影片的醫師、潤中醫診所院長有接業配",
+    products:"保健食品",
+    dream:"桂格、老協珍、老行家",
+    fb:"https://www.facebook.com/Dralicebeauty?mibextid=LQQJ4d",
+    ig:"https://www.instagram.com/dralicebeauty?igsh=MXVhNjN2ZnUwZ2I2Mw%3D%3D&utm_source=qr",
+    other:"",
+    card:""
+  },
+  {
+    name:"曾琴雁",
+    dept:"側彎專科",
+    group:"復健／骨科",
+    unit:"挺立康側彎醫療",
+    title:"創辦人",
+    bio:"https://www.uprightcome.com/scoliosis-expert/clinical-treatment",
+    products:"兒童、青少年、成長用品、產品、桌椅、書包、VitD, 鈣等",
+    dream:"和骨骼成長相關、日常姿勢等",
+    fb:"https://m.facebook.com/scoliosismaster/",
+    ig:"https://www.instagram.com/scoliosismaster/",
+    other:"https://www.facebook.com/uprightcome/",
+    card:"https://linktr.ee/scoliosismaster"
+  },
+  {
+    name:"林偉傑",
+    dept:"耳鼻喉科",
+    group:"耳鼻喉科",
+    unit:"林偉傑",
+    title:"總醫師",
+    bio:"林偉傑醫師於彰化基督教醫院訓練外科專科，於台中慈濟訓練耳鼻喉科專科。訓練過程對於病患照顧及手術技巧上不斷精進自己，除了獲得最佳住院醫師外，也在臨床研究上發表多篇研究論文。除了獲得台中慈濟醫院年度最佳成果獎外，也受邀於韓國，杜拜，日本，波蘭等國家，發表研究結果與國內外的學者分享，也在相關醫學領域擔任外國學者論文審稿者，目的是希望給予患者最新且最專業的醫療照顧。",
+    products:"藥物 食品 衛材",
+    dream:"感冒藥",
+    fb:"https://m.facebook.com/people/%E8%80%B3%E9%BC%BB%E5%96%89%E9%A0%AD%E9%A0%B8%E5%B0%88%E7%A7%91-%E6%9E%97%E5%81%89%E5%82%91%E9%86%AB%E5%B8%AB/100094328500305/",
+    ig:"https://www.instagram.com/entdoclin/",
+    other:"https://entdrlin.mystrikingly.com/",
+    card:"https://taplink.cc/entdrlin"
+  },
+  {
+    name:"楊幼琳主治醫師",
+    dept:"專業內科、新陳代謝科、內分泌科。",
+    group:"新陳代謝／內分泌科",
+    unit:"心安診所",
+    title:"副院長",
+    bio:"好學三寶媽，熱衷親子活動。\n健康促進、體重管理、醫學衛教。",
+    products:"(順位) 親子產品、運動用品、保健品、藥物。",
+    dream:"親子互動、健康促進、體重管理、醫學衛教。",
+    fb:"https://www.facebook.com/litendocrine?mibextid=eQY6cl",
+    ig:"https://www.instagram.com/dr.endocrine2023?igsh=MWp4MGdlNzh4NXh2eg==",
+    other:"",
+    card:""
+  },
+  {
+    name:"黃國瑋",
+    dept:"耳鼻喉科",
+    group:"耳鼻喉科",
+    unit:"中山醫學大學附設醫院",
+    title:"住院醫師",
+    bio:"我是黃國瑋醫師，目前在中部醫學中心擔任住院醫師，自媒體（IG,threads,fb)以分享住院醫師日常為主，包含各種醫院遇到有趣和溫馨的事情、分享值班的血淚等，因此有許多醫類相關的粉絲。曾在threads上有一天發布超過1萬讚的貼文。希望業配產品及內容能分享給更多住院醫師、護理師、醫療職類人員，受眾更有高中生醫學生等。",
+    products:"藥物 各式用品 補品",
+    dream:"香氛類產品",
+    fb:"https://www.facebook.com/profile.php?id=100000471357749&mibextid=LQQJ4d",
+    ig:"https://www.instagram.com/as8311567?igsh=YnhyMXV5NXBuZDIz&utm_source=qr",
+    other:"https://www.threads.net/@as8311567",
+    card:""
+  },
+  {
+    name:"饒曼齡",
+    dept:"耳鼻喉科",
+    group:"耳鼻喉科",
+    unit:"台北榮總",
+    title:"總醫師",
+    bio:"專業親切的耳鼻喉科醫師，平時給人富有生活品質、質感的形象。嗅味覺靈敏的吃貨，熱衷於簡單、健康又好吃的料理。 擁有RYT200 瑜伽師資認證，未來將融合既有醫學專業，帶著大家在瑜伽練習中一呼一吸之間，將心與身體重新連結，找到踏實、平靜的快樂與幸福。",
+    products:"耳鼻喉科使用相關藥物、保健食品、健康料理相關產品、 瑜伽相關產品、情緒管理相關產品、個人成長類書籍和課程",
+    dream:"鼻噴劑、 助聽器、lululemon , 定位高端質感的料理用品",
+    fb:"https://www.facebook.com/profile.php?id=61555138382359&mibextid=LQQJ4d",
+    ig:"https://www.instagram.com/dr.raorao_manling?igsh=MWR5ZW9oZmRoeHoyZQ%3D%3D&utm_source=qr",
+    other:"",
+    card:"https://taplink.cc/dr.raorao"
+  },
+  {
+    name:"陳菁兒",
+    dept:"兒童成長/減重專科",
+    group:"小兒科",
+    unit:"成長空間診所/禾馨醫療/張益豪診所",
+    title:"成長空間診所副院長",
+    bio:"大家好~我是兒童成長科菁兒醫師。專長於『兒童成長』及『青春期發育』，幫助孩子『身高超前部署』。另一專長為『基因檢測』，透過了解身體密碼，找到您和家人潛在的健康問題，提早發現提早治療『健康超前部署』。兒童成長和個人健康都是長時間的累積過程，菁兒醫師本身也是愛好運動及閱讀，健康自律陪伴大家一起健康成長。",
+    products:"醫療衛生：酒精、空氣清淨機。運動用品健康食品(雞精、優格等)。保養品",
+    dream:"白蘭氏，義美，3m...",
+    fb:"https://www.facebook.com/DrJillsGrowingGarden/",
+    ig:"https://www.instagram.com/drjillgrowthgene/",
+    other:"https://drjillgrowthgene.blogspot.com/",
+    card:""
+  },
+  {
+    name:"周余諭",
+    dept:"整形外科",
+    group:"整形外科",
+    unit:"三軍總醫院",
+    title:"主治醫師",
+    bio:"臺灣目前有4萬多名醫師，其中有1萬名投入醫美市場，但整形專科只有800個。",
+    products:"保健食品、食品、保健產品",
+    dream:"白蘭氏雞精，我從小喝到大，喝到我阿嬤以為我上癮",
+    fb:"https://www.facebook.com/psdryuyuchou",
+    ig:"https://www.instagram.com/psdr.yuyu.chou/",
+    other:"https://chousbeauty.blogspot.com/",
+    card:"https://chousbeauty.blogspot.com/2024/02/blog-post.html"
+  },
+  {
+    name:"陳奕成",
+    dept:"兒童內分泌科",
+    group:"小兒科",
+    unit:"禾馨婦幼診所",
+    title:"主治醫師",
+    bio:"因為不想長大 所以成為兒科醫師\n分享臨床上所見所聞\n提供每個寶貝『快樂長高』的可能",
+    products:"日常用品、親子用品",
+    dream:"樂高積木、跳繩、鮮乳品牌",
+    fb:"https://www.facebook.com/legocyc",
+    ig:"https://www.instagram.com/legox1x/",
+    other:"",
+    card:""
+  },
+  {
+    name:"蔡光前",
+    dept:"中醫",
+    group:"中醫科",
+    unit:"和懿堂中醫診所",
+    title:"專任醫師",
+    bio:"我是專門做鼻過敏的中醫師，雖然追蹤不多，但有心經營會真心推廣。除了吃中藥以外對過敏、調整體質、親子用品都很有興趣",
+    products:"中藥、健康食品、用品、親子產品，跟鼻過敏、異位性鼻膚炎、免疫力、腸胃相關的產品",
+    dream:"大研生醫、正官庄、dyson",
+    fb:"https://www.facebook.com/kc.tsai.md/",
+    ig:"https://www.instagram.com/patrick_kc_tsai/?hl=zh-tw",
+    other:"https://vegveg.tw/",
+    card:""
+  },
+  {
+    name:"鍾國騰",
+    dept:"婦產科",
+    group:"婦產科",
+    unit:"台北中山醫院",
+    title:"主治醫師（前婦產科主任）",
+    bio:"你好：我是婦產科醫師鍾國騰醫生，專精子宮肌瘤及子宮內膜異位症、婦女泌尿疾病相關微創治療。",
+    products:"藥物用品",
+    dream:"維生素D",
+    fb:"https://www.facebook.com/chungmave?mibextid=LQQJ4d",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"鍾國騰",
+    dept:"婦產科",
+    group:"婦產科",
+    unit:"台北中山醫院",
+    title:"婦產科主治醫師、海扶刀手術中心主任",
+    bio:"你好：我專長於婦科疾病（子宮肌瘤、子宮內膜異位症、婦女泌尿），之前也長期在接生，",
+    products:"藥物、親子產品",
+    dream:"維生素D G動椅 成人紙尿片",
+    fb:"https://www.facebook.com/chungmave?mibextid=LQQJ4d",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"沈耿仲",
+    dept:"耳鼻喉科",
+    group:"耳鼻喉科",
+    unit:"卓越耳鼻喉科",
+    title:"院長",
+    bio:"完整耳鼻喉科經歷，效率找到問題，提出精準治療，鼻子結構或功能上的需求，從內而外客製打造全方位調整計畫。",
+    products:"藥物 親子產品都可以",
+    dream:"關於鼻腔呼吸 睡眠都可以",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"黃千耀",
+    dept:"皮膚科",
+    group:"皮膚科",
+    unit:"雅文皮膚科",
+    title:"院長",
+    bio:"我是皮膚科專科醫師，目前自媒體的經營主要放在YouTube，擅長把精簡容易吸收的皮膚知識傳遞給大眾。我經常受邀進行國際性學術演講，也同時擅長演講技巧及投影片製作教學。\n我在大學時在魔術社擔任幹部，對於舞台表演及魔術效果也有所涉略，對產品也許能有不同呈現方式。",
+    products:"3C用品，藥品，保健品",
+    dream:"Samsung手機，ASUS, Acer",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"林彥安",
+    dept:"家庭醫學科",
+    group:"家庭醫學科",
+    unit:"林口長庚醫院",
+    title:"主治醫師",
+    bio:"醫學中心助理教授，曾獲桃園市優良醫師，院內優良教師與優良服務人員獎項。家庭醫學，老年醫學，與肥胖醫學專科醫師，隸屬於家醫學會青年醫師委員會。目前主做身心症，老人症候群，與多重就醫問題，尤其專注口腔灼熱症的診療。",
+    products:"EPA魚油, 維生素D製品,增肌營養品",
+    dream:"自律神經/身心症健康書籍,或投資理財書籍",
+    fb:"https://www.facebook.com/YenanlinMD",
+    ig:"https://www.instagram.com/msl_gp015a/",
+    other:"https://s19401044.blogspot.com/",
+    card:"https://s19401044.blogspot.com/2024/02/blog-post_26.html"
+  },
+  {
+    name:"楊幼琳",
+    dept:"內分泌",
+    group:"新陳代謝／內分泌科",
+    unit:"心安診所",
+    title:"副院長",
+    bio:"楊幼琳醫師\n專業內科、新陳代謝科、內分泌科。\n好學三寶媽，熱衷親子活動。\n健康促進、體重管理、醫學衛教。",
+    products:"用品、保健品、藥品。",
+    dream:"親子用品、保健品、藥品。",
+    fb:"https://www.facebook.com/litendocrine?mibextid=eQY6cl",
+    ig:"https://www.instagram.com/dr.endocrine2023?igsh=MWp4MGdlNzh4NXh2eg==",
+    other:"",
+    card:"https://mumadoris.carrd.co/#"
+  },
+  {
+    name:"周維薪",
+    dept:"婦產科/抗衰老",
+    group:"婦產科",
+    unit:"北市聯合醫院婦幼院區",
+    title:"醫師",
+    bio:"專長與特色 :\n體態調整 :  瘦身減脂\n壓力釋放  : 逆齡抗老\n備孕養卵  : 孕前調理\n\n「女性荷爾蒙一直是我的熱愛」，在婦產科的多年時光中，我不只是專精於多囊性卵巢的體質調整，更是把體質調整的功夫磨練的更鋒利。\n\n從體態調整、壓力釋放到備孕養卵，其實原理都是來自於荷爾蒙失調，而這其中的樞紐與脈絡，就讓我來替妳們解密吧！",
+    products:"抗衰老抗發炎保健食品(魚油、VIT D、Q10、肌醇) 親子產品",
+    dream:"惠氏藥廠、GSK、MSD",
+    fb:"",
+    ig:"https://www.instagram.com/elephantalkshow/",
+    other:"https://www.dcard.tw/@drelephant",
+    card:"https://portaly.cc/drelephant"
+  },
+  {
+    name:"黃昭勳",
+    dept:"耳鼻喉科",
+    group:"耳鼻喉科",
+    unit:"中平耳鼻喉科",
+    title:"西醫師",
+    bio:"耳鼻喉專科醫師\n西餐丙級證照\n二等遊艇駕駛執照\nAOW潛水執照\n日檢JLPT N2合格",
+    products:"保健食品 家電",
+    dream:"洗鼻器  耳鼻低能量雷射 空氣清淨機 除濕機",
+    fb:"https://www.facebook.com/SurgeonCooking?mibextid=kFxxJD",
+    ig:"https://www.instagram.com/dr.truetrue?igsh=ejVicjVodW03dDZi&utm_source=qr",
+    other:"https://www.pixnet.net/pcard/Drtruetrue/publish/articles",
+    card:""
+  },
+  {
+    name:"李晏廷",
+    dept:"耳鼻喉科",
+    group:"耳鼻喉科",
+    unit:"杏保醫網",
+    title:"醫師",
+    bio:"剛開始發展自媒體的耳鼻喉科醫師，專長是新生兒耳朵矯正及鼻過敏神經切除術，已有媒體開始幫忙報導，相信之後粉專人數會直線上升。",
+    products:"藥品，食品，用品，低咖啡因咖啡",
+    dream:"低咖啡因咖啡，除濕機，空氣清淨機，漱口水",
+    fb:"https://www.facebook.com/drleeyenting",
+    ig:"https://www.instagram.com/dr.entlyt/",
+    other:"https://www.youtube.com/@entleeyenting",
+    card:"https://taplink.cc/entleeyenting"
+  },
+  {
+    name:"施冠偉",
+    dept:"泌尿科",
+    group:"泌尿科",
+    unit:"中山顧家泌尿科診所",
+    title:"院長",
+    bio:"就是個隨性的醫師....XDDDD",
+    products:"藥物、用品",
+    dream:"無",
+    fb:"https://www.facebook.com/Dr.ManaGeGe",
+    ig:"https://www.instagram.com/dr.managege/",
+    other:"",
+    card:""
+  },
+  {
+    name:"楊智鈞",
+    dept:"心臟血管外科",
+    group:"心臟血管外科",
+    unit:"光田醫院",
+    title:"主任",
+    bio:"我是一位具備 15 年臨床經驗的心臟血管外科醫師，於榮總系統接受完正心臟手術訓練、以及國際知名心臟手術中心的進修，專長為成人心臟手術（心血管繞道手術、心臟瓣膜手術、以及主動脈剝離、主動脈瘤的治療），截至目前為止，總計有超過 500 例的心臟手術與大動脈手術經驗。並且於 2020 年至苗栗大千醫院開創心臟手術團隊，成功執行苗栗縣史首例主動脈剝離手術、創院首例開心手術，成立苗栗目前唯一具備「葉克膜」能力的心臟外科團隊。\n\n除了開心手術外，我也專精於「微創血管治療」，包括「微創靜脈曲張」、「血管支架／導管手術／球囊擴張」、「洗腎廔管治療」等，總計超過 3000 例經驗。\n\n在心臟外科醫師裡面，我是少數同時具備「醫學中心、區域醫院、地區醫院」的成功執業經歷，並且在三種不同層級醫院都成功執行心臟手術的醫師。我善於利用有限的資源、做出高品質的醫療成果，讓地方民眾享受就醫便利性的同時、能夠接受媲美醫學中心水準的治療。",
+    products:"腿部按摩機. 刮鬍刀",
+    dream:"萬寶龍. 大金冷氣. 舒適牌刮鬍刀",
+    fb:"https://www.facebook.com/doctor.patient.love/",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"方冠傑",
+    dept:"消化內科",
+    group:"消化內科",
+    unit:"明義診所",
+    title:"醫師",
+    bio:"https://kuanchiehfangmd.blogspot.com/p/blog-page.html",
+    products:"藥物、健康食品、醫美相關、生活用品、親子產品",
+    dream:"跑車、手錶；時裝",
+    fb:"https://www.facebook.com/DRKCFANG",
+    ig:"https://www.instagram.com/mingyiclinic/",
+    other:"https://www.youtube.com/watch?v=0z1axAtcpmQ&list=PLnlPdL4_3uxiUMosYRiHKJcr0dYlYt11T",
+    card:"https://kuanchiehfangmd.blogspot.com/p/blog-page_28.html"
+  },
+  {
+    name:"方冠傑",
+    dept:"消化內科",
+    group:"消化內科",
+    unit:"明義診所",
+    title:"醫師",
+    bio:"https://kuanchiehfangmd.blogspot.com/p/blog-page.html",
+    products:"藥物、健康食品、健康器材、生活用品、親子產品",
+    dream:"跑車、手錶、時裝",
+    fb:"https://www.facebook.com/DRKCFANG",
+    ig:"https://www.instagram.com/mingyiclinic/",
+    other:"https://www.youtube.com/playlist?list=PLnlPdL4_3uxiUMosYRiHKJcr0dYlYt11T",
+    card:"https://kuanchiehfangmd.blogspot.com/p/blog-page_28.html"
+  },
+  {
+    name:"楊境森",
+    dept:"耳鼻喉科",
+    group:"耳鼻喉科",
+    unit:"粱耳鼻喉科診所",
+    title:"醫師院長",
+    bio:"開業30年病人10萬忠誠度極高有強大推銷能力（台北士林社子市場口碑老店的）兒童鼻子氣管過敏照護，3高糖尿病膽固醇高血壓照護，為本院強項！",
+    products:"保健產品食品，藥物，新科技",
+    dream:"過敏有關的產品 3高膽固醇血壓糖尿病老化的產品",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"張進芳",
+    dept:"耳鼻喉科",
+    group:"耳鼻喉科",
+    unit:"睿恩診所",
+    title:"院長",
+    bio:"前大里仁愛醫院耳鼻喉頭頸外科主治醫師，現職是大里睿恩診所的院長，除了一般疾病治療以外，也從事許多醫美整形相關治療，包括鼻整形、雙眼皮、抽補脂、埋線、皮秒雷射、電音波拉皮、肉毒、玻尿酸注射⋯⋯等",
+    products:"保健品、生活用品、健康相關產品",
+    dream:"沒特別想法",
+    fb:"https://www.facebook.com/ccfnosejob?mibextid=LQQJ4d",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"高偉棠",
+    dept:"泌尿科",
+    group:"泌尿科",
+    unit:"雙和醫院",
+    title:"主治醫師",
+    bio:"我是一位44歲的泌尿科醫師，出生並在苗栗鄉村長大。從我還是一個孩子的時候，我就對醫學產生了濃厚的興趣。這個興趣不僅來自於我的好奇心，也是源於我對幫助他人的渴望。\n\n在我的成長過程中，我目睹了家鄉社區的醫療需求。許多人面臨著健康挑戰，但醫療資源有限。這激勵了我追求成為一名醫師的夢想，我希望能回饋給我的社區，幫助那些需要醫療援助的人們。\n\n成為一名泌尿科醫師的決定也受到了家庭的影響。我的父親曾經患有腎臟癌，這是一個艱難的挑戰，不僅對他自己，也對我們全家造成了極大的影響。經過妥善的治療，我很高興地宣布，父親目前一切安好，這也加深了我對泌尿科醫學的信心和熱情。父親的經歷成為了我決定追求泌尿科醫學專業的主要原因之一。\n\n在我的職業生涯中，我曾待在業務量繁重的新北醫學中心工作了12年。雖然這段經歷讓我學到了很多，但我漸漸意識到，現行的醫療體系下，醫療品質逐漸下降。健保體制限制了醫師在治療方面的自主權，使得我無法為患者提供我認為最合適的治療方案。這驅使著我不斷探索新的方式和方法，以提供更好的醫療服務。\n\n因此，我在2024年決定創立一個全新的泌尿科品牌，跳脫健保的框架，致力於為患者提供最好的醫療品質。我相信，每個病人都應該獲得最優質的治療，我將不受限於現有醫療體系，竭盡所能，為他們提供最有效的解決方案。\n\n我的職業生涯不僅僅是一份工作，更是我的使命。我相信每個人都應該享有優質的醫療服務，無論他們身在何處。因此，我將致力於建立一個品牌，讓患者信任，並在他們最需要幫助的時候，給予他們最大的支持和關懷。\n\n除了工作之外，我還熱愛閱讀、旅行和與家人共度時光。這些活動豐富了我的生活，使我更加全面地理解世界和人生的意義。我相信，通過不斷地學習和探索，我能夠成為一個更好的醫師，為更多的人帶來希望和健康。",
+    products:"藥物、保健品、感染預防、親子產品、運動相關、老年保健相關、性功能和排尿相關、術後營養恢復補充、露營、國內外旅行",
+    dream:"維他命",
+    fb:"https://m.facebook.com/people/%E9%AB%98%E5%81%89%E6%A3%A0-%E6%B3%8C%E5%B0%BF%E7%A7%91%E9%86%AB%E5%B8%AB/100054452442313/",
+    ig:"https://www.instagram.com/kao_wei_tang",
+    other:"",
+    card:"https://linktr.ee/joshkao?utm_source=linktree_profile_share&ltsid=e973b662-d425-43a7-9890-5388595b9eba"
+  },
+  {
+    name:"吳景宜",
+    dept:"神經科",
+    group:"神經科",
+    unit:"順立骨科診所",
+    title:"醫師",
+    bio:"是一名專做疼痛治療的神經科醫師,擅長頭痛、下背痛等治療",
+    products:"電器、食品、用品",
+    dream:"暫無",
+    fb:"https://www.facebook.com/profile.php?id=100069440527241&mibextid=LQQJ4d",
+    ig:"https://www.instagram.com/neurodrching?igsh=MTkwdjJmMGpqOG9lbg%3D%3D&utm_source=qr",
+    other:"https://youtu.be/69H45_6pf48?si=w_0ek49PcsNn7gF-",
+    card:""
+  },
+  {
+    name:"莊幼先",
+    dept:"牙科",
+    group:"牙科",
+    unit:"牙科",
+    title:"牙醫師",
+    bio:"創造美麗展現魅力",
+    products:"用品 親子產品 美容保健產品",
+    dream:"美容 牙膏",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"陳佑誠",
+    dept:"耳鼻喉科",
+    group:"耳鼻喉科",
+    unit:"順誠耳鼻喉科診所",
+    title:"院長",
+    bio:"陳佑誠耳鼻喉科,對於新3C的事物喜於評比,尚在經營中,短影音較擅長(tiktok在2021年為30大創作者)",
+    products:"攝影、親子、3C(曾有寫分析https://health.businessweekly.com.tw/article/ARTL000049742 如何挑空清)",
+    dream:"PLAUD、insta360、iRent",
+    fb:"https://www.facebook.com/entcyc/",
+    ig:"https://www.instagram.com/entcyc/",
+    other:"https://www.tiktok.com/@entcyc",
+    card:"https://taplink.cc/entcyc"
+  },
+  {
+    name:"胡怡萱",
+    dept:"皮膚科",
+    group:"皮膚科",
+    unit:"京硯皮膚科診所，亮晴皮膚科診所",
+    title:"皮膚科主治醫師，副院長",
+    bio:"皮膚科專科醫師，經馬偕紀念醫院完整訓練，前馬偕紀念醫院皮膚科主治醫師，曾任職京硯皮膚科診所副院長，亮晴皮膚科。\n已有不少合作經驗，FB業配文、肖像代言、上節目(醫師好辣、健康節目)、廣播、youtube影片、演講。",
+    products:"臉部皮膚保養品、低敏彩妝品、身體皮膚保養品、親子用品(和皮膚有關，例如手帕、防曬，但小孩不露臉)",
+    dream:"目前沒有想到",
+    fb:"https://www.facebook.com/skindrhu/",
+    ig:"https://www.instagram.com/skindrhu/",
+    other:"",
+    card:""
+  },
+  {
+    name:"何建輝",
+    dept:"胸腔內科",
+    group:"胸腔內科",
+    unit:"安南醫院",
+    title:"內科加護病房主任/胸內主治醫師",
+    bio:"https://www.chestdrho.com/blank-1",
+    products:"藥品、疫苗、電器用品、空污染相關產品",
+    dream:"空氣濾淨機",
+    fb:"https://m.facebook.com/drchestho/",
+    ig:"https://www.instagram.com/chestdrho?igsh=OGQ5ZDc2ODk2ZA==",
+    other:"https://www.chestdrho.com/",
+    card:""
+  },
+  {
+    name:"黃翔",
+    dept:"皮膚科",
+    group:"皮膚科",
+    unit:"新竹愛生美皮膚科",
+    title:"院長",
+    bio:"無法說不真實的話 但怎麼說可以討論",
+    products:"都可以",
+    dream:"金剛經 吸引力法則",
+    fb:"https://www.facebook.com/skin.dr.huang.hsiang?mibextid=LQQJ4d",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"郭于誠",
+    dept:"放射腫瘤科",
+    group:"放射腫瘤科",
+    unit:"中國醫大新竹附醫",
+    title:"主任",
+    bio:"我是癌症治療醫師，同時也投身於癌症各項相關公益活動、於各企業或社團組織演講推廣各項個人或企業經營管理的議題、於醫院與學校分享全人醫療與職涯發展。著有「對話：大郭醫師的癌症診間微光故事」，分送給癌症病患與家屬，也錄製podcast「隔壁的桌子：本日休診」節目，透過書本與節目陪伴病患與家屬，在人生至關重要時刻做對決定。未來將繼續出版各類相關議題的書籍與節目、同時計畫開設相關課程工作坊，盡力協助需要幫助的人！",
+    products:"親子教育、生涯規劃、癌症相關、電磁波相關、心理輔導",
+    dream:"ESG、身心健康",
+    fb:"https://www.facebook.com/profile.php?id=100000274231412",
+    ig:"",
+    other:"https://www.facebook.com/groups/708940083613826/?ref=share_group_link",
+    card:""
+  },
+  {
+    name:"韓宇軒",
+    dept:"家庭醫學科",
+    group:"家庭醫學科",
+    unit:"臺北榮民總醫院",
+    title:"住院醫師",
+    bio:"韓宇軒，國立成功大學醫學系畢業輔修企業管理學系，主業為住院醫師，副業包含萬粉IGer/自媒體社群KOL、協會共同創辦人暨首屆監事、接案行銷顧問、行銷&性教育講師、攝影師、酒吧股東等，擅長家庭醫學、預防醫學、減重醫學、性醫學、行銷策略規劃、整合行銷、社群行銷與經營、內容行銷、文案力、公關行銷、商業合作、商務開發、活動企劃、視覺資訊設計、行銷教學、人像外拍/旅拍、活動影像紀錄等。",
+    products:"情趣用品、保健食品、旅遊住宿、美食餐廳、投資理財",
+    dream:"理膚寶水",
+    fb:"https://www.facebook.com/nax841117",
+    ig:"",
+    other:"",
+    card:"https://lihi1.cc/5haFu"
+  },
+  {
+    name:"林羿辰",
+    dept:"復健科",
+    group:"復健／骨科",
+    unit:"宸新復健科",
+    title:"院長",
+    bio:"希望可以經由跟廠商合作，達到協助宣傳商品，也可以幫助醫師增加曝光率的效果，在不會影響雙方觀感的情況下，達到雙贏。",
+    products:"生活用品(床，椅子等）重訓設備（啞鈴，彈力帶居家飛輪）復健設備。保健食品，藥品,寵物用品",
+    dream:"Nike,  nba, mlb",
+    fb:"https://www.facebook.com/DrYiChen?mibextid=ZbWKwL",
+    ig:"https://www.instagram.com/dryichen?igsh=b3Rjd3dxcGpoNnJh",
+    other:"https://youtube.com/@dryichen?si=o69pO00yijhtMTZC",
+    card:""
+  },
+  {
+    name:"張言鴻",
+    dept:"家庭醫學科",
+    group:"家庭醫學科",
+    unit:"德賢美醫診所",
+    title:"院長",
+    bio:"德賢美醫體系院長",
+    products:"都可以",
+    dream:"醫學健康醫美運動",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"李俊廷",
+    dept:"中醫",
+    group:"中醫科",
+    unit:"艾苜中醫診所",
+    title:"院長",
+    bio:"我是俊廷，曾任職於高雄長庚中醫科，因為老家在台南因此後來回台南開業，我自己的專長與興趣主要是落在婦科與免疫相關疾病的調理(研究所是唸陽明微生物免疫學研究所)，因此我很喜歡將中醫與免疫學相關的議題做結合也發表了一些相關著作可參閱下列網址(https://drctlee.wordpress.com/publication/)",
+    products:"保健食品、中藥品、食品(燕窩、滴雞精)",
+    dream:"益生菌(因為現在蠻多研究顯示益生菌與中藥可以相輔相成)",
+    fb:"",
+    ig:"",
+    other:"https://drctlee.wordpress.com/introduction/",
+    card:"https://taplink.at/en/profile/14764400/pages/"
+  },
+  {
+    name:"陳俊宏",
+    dept:"小兒科/神經科/心臟科/新陳代謝/科泌尿科",
+    group:"小兒科",
+    unit:"長頸鹿聯合診所",
+    title:"院長",
+    bio:"大台中診所協會理事長, 診所協會全聯會監事長",
+    products:"自費產品、藥物、醫療保健品",
+    dream:"外泌體！EECP",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"黃昭勳",
+    dept:"耳鼻喉科",
+    group:"耳鼻喉科",
+    unit:"中平耳鼻喉科診所",
+    title:"西醫師",
+    bio:"我是有西餐丙級證照的耳鼻喉科醫師\n經營料理與營養健康與耳鼻喉科為主題的粉專\n目前籌備開業中\n歡迎家電廠商贊助診所 可置DM成為社區活廣告",
+    products:"洗鼻器 營養品 空氣清淨機 除濕機 廚房家電 健康便當 衛福部戒菸形象代言",
+    dream:"善存 大研生醫 白蘭氏 Panasonic/LG/Hitachi空氣清淨機除濕機",
+    fb:"https://www.facebook.com/SurgeonCooking?mibextid=kFxxJD",
+    ig:"https://www.instagram.com/dr.truetrue?igsh=ejVicjVodW03dDZi&utm_source=qr",
+    other:"",
+    card:""
+  },
+  {
+    name:"張家豪",
+    dept:"ENT",
+    group:"耳鼻喉科",
+    unit:"羅東博愛醫院",
+    title:"主治醫師",
+    bio:"目前為羅東博愛醫院耳鼻喉科主治醫師，鼻過敏、鼻竇炎、鼻整形手術專家，幫助數百名病患能夠用鼻子順暢呼吸，以及美化鼻形，曾至韓國進修鼻整形三個月，熟悉韓國文化。育有兩個學齡前幼童和一隻瑪爾濟斯！",
+    products:"益生菌、除濕機、空氣清淨機",
+    dream:"普拿疼、LG產品、Volvo",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"許瑛倢",
+    dept:"耳鼻喉",
+    group:"耳鼻喉科",
+    unit:"台北慈濟/原美學",
+    title:"主治醫師",
+    bio:"身為一名耳鼻喉科醫師,平常在醫學中心處理鼻塞打呼的患者。其餘時間則是斜槓在醫美領域進修。口調不錯,喜歡藉由輸出 讓更多人接受訊息+認識我",
+    products:"與睡眠/鼻塞過敏相關產品。保健食品",
+    dream:"M2膠原蛋白飲😆",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"張英傑",
+    dept:"泌尿科",
+    group:"泌尿科",
+    unit:"亞大附醫",
+    title:"主治醫師",
+    bio:"中部區域醫院之泌尿科主治醫師，專長男性功能治療、男性更年期治療、結紮、包皮手術、陰莖增粗或增長、性傳染病治療、泌尿道結石內視鏡手術、攝護腺肥大治療、泌尿道感染預防等，未來會朝個人IP作建立與曝光，",
+    products:"親子產品、玩具、男性保養品、健身營養品",
+    dream:"Volvo",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"簡心潔",
+    dept:"中醫科",
+    group:"中醫科",
+    unit:"山茶花中醫診所",
+    title:"院長",
+    bio:"我是簡心潔醫師，對於養生保健產品很想推廣給大眾知道，極力推廣治療亞健康的概念。",
+    products:"養生產品",
+    dream:"養生保健產品",
+    fb:"https://www.facebook.com/drchienhsinchieh",
+    ig:"https://www.instagram.com/dr.hcc?igsh=MXh1aHhid2xjMWZtaw%3D%3D&utm_source=qr",
+    other:"",
+    card:""
+  },
+  {
+    name:"李渘崴",
+    dept:"齒顎矯正專科",
+    group:"牙科",
+    unit:"寰宇診所 福美診所  采新診所  群富診所 （雙北地區）",
+    title:"牙醫師",
+    bio:"以前的客戶只在意牙齒排列  現在的客戶對整體下臉的美觀都精雕細琢  嘴唇位置設計 下巴位置設計都包辦到全方位  主打大幅度升級外觀的精緻度  這也是我們工作中的極大挑戰  另外我私底下的涉略相關包含藝術和旅行",
+    products:"親子產品   小孩用品  適用於年齡層小於35歲的相對適合  （我的科別是齒顎矯正專科  客戶年齡相對年輕  未婚比例高 甚至婚紗相關也是可以）",
+    dream:"跟精雕細琢的美感有相關  譬如chaumet",
+    fb:"https://www.facebook.com/RWortho.tw?mibextid=LQQJ4d",
+    ig:"https://www.instagram.com/dr.wei11?igsh=MThzeGZpZHdrMXIxNg%3D%3D&utm_source=qr",
+    other:"",
+    card:""
+  },
+  {
+    name:"吳易儒",
+    dept:"醫美",
+    group:"整形外科",
+    unit:"維格診所",
+    title:"院長",
+    bio:"嗨我是吳易儒醫師，在醫美領域已耕耘4年以上。除了經營「芳療醫師吳易儒」粉專，用簡單的文字向民眾介紹不再遙不可及的醫美療程與身心保養之外，也具有化妝品系碩士學歷。主修精油化學，同時也有NAHA國際芳療師執照。自身有減重20公斤及產後減重不復胖的經歷。現任職於各大醫美診所，過往代言形象良好，合作非常愉快。",
+    products:"彩妝、保養、芳療（具化妝品系碩士學歷，專長精油化學）、減重（親身經歷減重20公斤及產後瘦身）、孕產、育兒",
+    dream:"芳療家、無印良品（保養/精油）、慕之恬廊、滿意寶寶、媽媽餵",
+    fb:"https://www.facebook.com/dr.iroowu?mibextid=LQQJ4d",
+    ig:"https://www.instagram.com/dr.iroo?igsh=MXJ6d3VsaDlqZnZkbA==",
+    other:"",
+    card:"https://portaly.cc/dr.iroo"
+  },
+  {
+    name:"徐嘉琪",
+    dept:"皮膚科",
+    group:"皮膚科",
+    unit:"英爵醫美",
+    title:"院長",
+    bio:"徐嘉琪醫師，現任英爵醫美院長，專科出身於成大皮膚科，曾任書田診所皮膚科主任醫師，擁有超過十年的臨床與醫美經驗\n\n徐醫師從小因雀斑與痘痘困擾而立志成為皮膚科醫師，深刻理解肌膚問題帶來的不安與渴望改善的心情。她樂於分享專業知識，並善於將艱澀醫學化為貼近生活的語言，讓顧客安心決策。\n\n她以「自然、安全」為核心理念，專精於膚質管理、抗老療程、微整形與非侵入性治療\n\n在她眼中，美不在於迎合單一標準，而是找到「剛剛好的自己」\n\n除了專業以外，她的生活重心是家庭，她有兩個青春期孩子，她從不會下廚的書呆子蛻變為可以輕鬆煮一桌孩子愛吃家常菜的主婦，收納、打掃等家事也是一把罩，其餘興趣為看書、網球",
+    products:"保養品、家用產品、食品",
+    dream:"Chanel、Dior、海洋拉娜",
+    fb:"https://www.facebook.com/share/1JgCwZhvFv/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/drhsu77?igsh=MXh6M2FqN2twY3AyOQ%3D%3D&utm_source=qr",
+    other:"https://www.threads.com/@drhsu77?igshid=NTc4MTIwNjQ2YQ==",
+    card:""
+  },
+  {
+    name:"林建佑",
+    dept:"牙醫",
+    group:"牙科",
+    unit:"桃園京鼎牙醫",
+    title:"院長",
+    bio:"我是「自己幫自己植牙」的 MVP牙醫 林建佑醫師，同時也是桃園京鼎牙醫院長。\n我的專長是導航植牙及一日全口重建，\n數千例植牙用戶訪談一致推薦，「親和力就是林院長的超能力」",
+    products:"親子產品，牙刷牙膏等潔牙工具",
+    dream:"Tesla，",
+    fb:"https://www.facebook.com/share/1A3TPS3PDb/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/mvpdentistlin?igsh=aGI2ZnNxamh5MnBt&utm_source=qr",
+    other:"https://linktr.ee/mvpdentistLin?fbclid=PAQ0xDSwL4LUlleHRuA2FlbQIxMQABp_SJAJ1UIw20pbBGb-w_SKZG3POTRSUUtsOXUgCsi-c-roFgSVaMtarsu0TM_aem_j64kKDSHdsEhuVbl2yxLQQ",
+    card:"https://linktr.ee/mvpdentistLin?fbclid=PAQ0xDSwL4LUlleHRuA2FlbQIxMQABp_SJAJ1UIw20pbBGb-w_SKZG3POTRSUUtsOXUgCsi-c-roFgSVaMtarsu0TM_aem_j64kKDSHdsEhuVbl2yxLQQ"
+  },
+  {
+    name:"徐健倫",
+    dept:"兒科/感染科",
+    group:"小兒科",
+    unit:"徐健倫親子診所",
+    title:"院長",
+    bio:"粉專近期改由太太經營，太太文筆幽默風趣(有宅女小紅的感覺)，所以除了原本專業衛教文章外，多了很多與粉專追蹤者的互動，也偶爾曬曬醫師本人額外才藝，增加不少可看性。雖然專頁粉絲尚不多(原為診所專頁，目前逐漸轉型中)，個人認為未來可期！",
+    products:"奶粉、清潔衛生消毒用品(酒精擦、洗手乳、洗衣精、抗腸病毒清潔劑等)、空氣清淨機",
+    dream:"著名兒童讀物/雜誌/節目/產品(如：巧連智、汪汪隊/波力聯名商品)",
+    fb:"https://www.facebook.com/Ped.Dr.HSU",
+    ig:"",
+    other:"https://www.facebook.com/share/1JenYiUuxp/?mibextid=wwXIfr",
+    card:""
+  },
+  {
+    name:"蘇怡甄",
+    dept:"小兒科",
+    group:"小兒科",
+    unit:"羅東的兒科診所",
+    title:"主治醫師",
+    bio:"目前於兒科診所服務，對自己的親和力很有信心：）2024年曾經為幫寶適尿布代言一年，期待有適合的嬰幼兒相關商品的合作機會，謝謝。",
+    products:"親子產品、抗過敏之外用品、乳液及家用品（除濕機、濾網、空氣清新機）、嬰兒屁屁膏、嬰幼兒護膚霜、奶粉、尿布、益生菌、兒童繪本、兒童維他命",
+    dream:"雀巢奶粉、慕之恬廊、幫寶適、啟賦奶粉",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"劉怡慧",
+    dept:"皮膚科",
+    group:"皮膚科",
+    unit:"劉怡慧皮膚科診所",
+    title:"院長",
+    bio:"INTJ內向對自己要求高，凡事思考再思考，不輕舉妄動。喜歡藝術文學美術，不善社交。不喜歡出風頭。但喜歡幫忙做事統籌協調。",
+    products:"女性用品 健康運動 瑜伽 畫展 書籍",
+    dream:"哈哈 特斯拉 豪宅 珠寶 精品 （不要吃進肚子裡面的）",
+    fb:"https://www.facebook.com/share/1BoqfpGvqE/?mibextid=wwXIfr",
+    ig:"",
+    other:"",
+    card:"https://www.joyandwisdom.org/"
+  },
+  {
+    name:"郭大維",
+    dept:"中醫師",
+    group:"中醫科",
+    unit:"扶原中醫診所",
+    title:"院長",
+    bio:"正官庄全系列產品代言人/三立健康零距離主持人",
+    products:"以中醫醫療為圓心擴散的商品都可以（女性用品也可以）",
+    dream:"Mercedes Benz",
+    fb:"https://www.facebook.com/share/19GCWQ1DGd/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/guodawei_00?igsh=czI5MGZ3MWtmamM2&utm_source=qr",
+    other:"https://www.threads.com/@guodawei_00?igshid=NTc4MTIwNjQ2YQ==",
+    card:""
+  },
+  {
+    name:"林軒任",
+    dept:"腎臟科",
+    group:"腎臟科",
+    unit:"亞洲大學附屬醫院",
+    title:"腹膜透析主任",
+    bio:"我是引人入腎林軒任醫師，一位醫學中心的腎臟科醫師 ，專注於醫學白話文，臉書粉專1.4萬人，核心是「高齡/糖尿病/腎臟病」，目前有自己的200集podcast, YT及部落格網站",
+    products:"營養補充品，營養品，外用藥膏，濾水器，淨水器，食安食品",
+    dream:"Tesla, 台積電，nvidia",
+    fb:"https://www.facebook.com/share/1GsN83LKEk/?mibextid=wwXIfr",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"張芯瑜",
+    dept:"眼科",
+    group:"眼科",
+    unit:"遠見眼科台北101旗艦",
+    title:"主治醫師",
+    bio:"https://reurl.cc/6qNEKr",
+    products:"親子護眼產品、眼藥水、眼內藥物注射針劑、魚油、墨鏡、睫毛增長液、護眼電子書、護眼電子紙、護眼繪本、熱敷眼罩",
+    dream:"Roche羅氏、Bayer拜耳、Santen參天、Zeiss蔡司、親子天下、Ray-Ban雷朋、Kobo樂天、Readmoo讀墨、Osim、Tokuyo",
+    fb:"https://www.facebook.com/share/1CUBR2may8/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/drchangshinyu?igsh=NWxleHo1N3ZneW45&utm_source=qr",
+    other:"https://youtube.com/channel/UC-h9DiOf0CTzvAzPMdQgO7Q?si=nlvQiP_MDGS0srbW",
+    card:"https://reurl.cc/z5AMqQ"
+  },
+  {
+    name:"張安迪",
+    dept:"腸胃科/肥胖專科/內視鏡專科",
+    group:"消化內科",
+    unit:"佳安醫學診所",
+    title:"院長",
+    bio:"經歷台大健檢中心訓練及日本名古屋大學附設醫院訓練，中國附醫消化醫學中心及國際代謝形體醫學中心主治醫師，現為佳安醫學診所院長，曾多次獲邀國際級演講暨內視鏡手術表演，專長為各式內視鏡手術、減重內視鏡手術、健康檢查、癌症預防。",
+    products:"健康衛教影音、藥品、健康食品、形象產品",
+    dream:"Wakamoto",
+    fb:"https://www.facebook.com/share/16svkKXomk/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/12andychang?igsh=MXdpNDd6ZTVicHpzZQ%3D%3D&utm_source=qr",
+    other:"https://andychangmd.blogspot.com/?m=1&fbclid=PAQ0xDSwL4fYFleHRuA2FlbQIxMQABp7WoN_awS4cQ-2rcDG_1dPhQfBg2L8n8142pZ-f3B5Cl3KboYOkdpeJTAby-_aem_uzqpDIuzZI7tGhvP2iEHQg",
+    card:"https://taplink.cc/andychang"
+  },
+  {
+    name:"何建輝",
+    dept:"胸腔內科",
+    group:"胸腔內科",
+    unit:"安南醫院",
+    title:"內科加護病房主任",
+    bio:"我是你的呼吸道專科醫生，曾疫情期間以專家身分受邀上政論節目超過100+，治療各式呼吸道疾病患者超過1000+，於後疫情的長新冠時代教你怎麼照顧好你的呼吸道健康。",
+    products:"空氣清淨相關、保健",
+    dream:"Ex:Honeywell旗艦機",
+    fb:"https://www.facebook.com/drchestho/",
+    ig:"https://www.instagram.com/chestdrho",
+    other:"https://www.chestdrho.com/",
+    card:"https://taplink.cc/chestdrho"
+  },
+  {
+    name:"胡書瑋",
+    dept:"小兒科",
+    group:"小兒科",
+    unit:"佳安醫學診所",
+    title:"副院長",
+    bio:"【 學經歷 】\n中興大學轉譯醫學研究所博士班\n中國醫藥大學中西醫雙主修 醫學士\n童綜合醫院兒童醫學部&肥胖防治科主治醫師\n中國醫大兒童醫院肝膽腸胃科研修醫師\n童綜合醫院小兒神經科研修醫師\n台北&新竹馬偕兒童醫院住院醫師\n【特殊事蹟 】\n同時持有兒科消化學+神經學+青少年醫學三張次專科\n知名減重藥原廠研究計畫主持人之一\n全台第一位進修學習胃鏡縮胃減重的小兒腸胃科醫師\n月子中心、醫院、診所演講合計超過50場\n台灣肥胖醫學會肥胖專科醫師\n2022波士頓大學醫學院學士後兒童營養學程研習\n2023巴塞隆納兒童肥胖專家論壇台灣唯二受邀專家之一\n2023首爾亞太兒消年會學術研究海報刊登\n2024慕尼黑大學生命早期營養學程研習\n2024善纖達肥胖減重原廠認證研習\n2024東京台日韓兒消聯合會學術研究海報刊登\n2025週纖達肥胖減重原廠認證研習\n2025京都世界超音波年會學術研究海報刊登",
+    products:"藥物、營養品、益生菌、醫師工作服、親子產品",
+    dream:"星宇航空、雷文虎克生技、惠氏、雀巢",
+    fb:"https://www.facebook.com/drhushuwei",
+    ig:"https://www.instagram.com/doctor_hu_shiawase/",
+    other:"https://www.threads.com/@doctor_hu_shiawase?xmt=AQGzKLz6NCCdUpEKt06seZUd9ebvEI6bCeZ_eLNCD0HvL1w",
+    card:"https://portaly.cc/doctorhu"
+  },
+  {
+    name:"陳君琳",
+    dept:"家醫科",
+    group:"家庭醫學科",
+    unit:"越 L’excellence 功能醫學診所",
+    title:"院長",
+    bio:"陳君琳醫師，畢業於輔仁大學醫學系，曾任台北馬偕紀念醫院家庭醫學科主治醫師，現為 越 L’excellence 功能醫學診所越 L’excellence 功能醫學診所院長。\n\n專精功能醫學、增肌減脂、健康減重、抗衰老醫學，以及賀爾蒙、自律神經失調與三高等亞健康調理，並取得美國抗衰老醫學會（A4M）認證。憑藉自身成功減重30公斤的經歷與十餘年的臨床實績，陳醫師除於門診協助病患重拾健康，也長期受邀各大平面、電視、電台與網路媒體專訪與合作，並至各地演講，積極推廣功能醫學與健康生活理念，致力讓每一個人都能達成健康自信的目標。\n\n媒體曝光：\n\n📌 電視節目：醫師好辣、健康2.0 、如果云知道、女人我最大、醫次搞定、下班經濟學、小宇宙大爆發、Dr 劉的健康週報、健康好生活、醫學大聯盟、新聞挖挖哇、真相急先鋒、十點不一樣、歡樂智多星、綜藝大熱門、Chill Chill 董事長、生活智多星、女人234、請問你是哪裡人、全民星攻略、拜託ATM、這事有影無、超級研究事、別讓身體不開心... 等。\n\n📌 平面媒體：商業週刊、康健雜誌、天下雜誌、天下50+、VOGUE、WE PEOPLE 東西名人、PRESTIGE雜誌、優渥誌專刊：名醫教你搞定慢性發炎、FHM男人幫... 等。\n\n📌 電台、網路頻道：營養健身葛格 Peeta、博音、Marie Claire萬事問瑪麗、常常好食、FB新鮮事 醫療人物專訪、幸福多一點、銀髮新視界、女人想聽的事、健康萊了、白袍下班後... 等。\n\n📌 網路新聞媒體：健康2.0、TVBS新聞網、早安健康、ETtoday新聞雲、民視新聞網、CNA平台、三立新聞網、今健康、今日新聞、中廣新聞網、人物誌 Persona、康健雜誌、自由健康網、健康醫療網、ELLE線上、民生科技傳媒、蕃薯藤 、民生頭條、人間福報、風傳媒、中時新聞網、星島日報、NOWnews今日新聞、中天新聞網、YAHOO新聞、香港01、遠見雜誌、聯合新聞網、食醫行市集、ETtoday健康雲、妞新聞、台灣民眾電子報、金展新聞網、壹蘋新聞網、優活健康網、YAHOO運動、TEEPR、民眾日報、台視網路新聞... 等。",
+    products:"藥物、保健品、生鮮食材、用品、3C、旅行、運動、美食、睡眠輔助、紓壓用品",
+    dream:"目前沒有",
+    fb:"https://www.facebook.com/jiankangmeili",
+    ig:"https://www.instagram.com/healingtw",
+    other:"https://www.youtube.com/@lexcellencehealth",
+    card:"https://www.hopp.bio/drccl"
+  },
+  {
+    name:"蔡明劼",
+    dept:"內科、內分泌新陳代謝科",
+    group:"新陳代謝／內分泌科",
+    unit:"陳顯明診所、前成大醫院內科",
+    title:"醫師、副院長",
+    bio:"擁有糖尿病專科醫師、肥胖症專科醫師、國際健身教練證照(ACSM-CPT)。擅長糖尿病、三高、瘦身等專業。",
+    products:"藥品，食品，糖尿病營養品",
+    dream:"目前沒有",
+    fb:"https://www.facebook.com/Dr.TsaiHealthFitness/",
+    ig:"https://www.instagram.com/dr.tsaijili/",
+    other:"https://www.youtube.com/@dtsaifit",
+    card:"https://portaly.cc/dr.tsai?fbclid=PAZXh0bgNhZW0CMTEAAadqjwmCxkg7FS0-Ym5CsFuN8IKI8amiHlwcyxSIIIzn3rdrPqLuazFD-u98OA_aem_FhWIpY8_PnOsdrm_ZlpX-g"
+  },
+  {
+    name:"劉立德",
+    dept:"牙科",
+    group:"牙科",
+    unit:"中壢晶睿/晶悅/晶匯牙醫（日三牙醫體系）",
+    title:"晶睿院長/晶悅副院長",
+    bio:"我是桃園及中壢地區活躍於醫療領域的牙醫師劉立德，專長於植牙與美學牙科重建，致力於為每一位患者打造完美微笑。做為日三牙醫體系（晶睿牙醫、晶悅牙醫、晶匯牙醫、寶貝牙牙醫）的共同創辦人，我熱愛將專業與創新結合，讓牙齒健康與外在美感同步升級。我相信微笑的力量能夠改變這個世界，因此不斷追求技術卓越，讓患者在感受到專業照護的同時，也能展現自信的笑容。\n除了熱衷於牙科技術，我也希望將專業能量擴展到更廣泛的合作領域。未來期待與牙科及醫療相關廠商或職業棒球球團建立商業代言與合作關係，用專業與熱情傳遞健康與精彩。無論是微笑的魅力還是運動的激情，我都願意成為橋樑，讓專業在不同的舞台上閃耀光芒。",
+    products:"牙膏（舒酸定/高露潔） 牙科相關用品",
+    dream:"職業棒球⚾️ （運動傷害 牙齒外傷 牙齒美觀）歌手唱歌發音",
+    fb:"https://www.facebook.com/DrLeaderLiu/",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"陳昱傑",
+    dept:"骨科",
+    group:"復健／骨科",
+    unit:"陳昱傑骨科診所",
+    title:"院長",
+    bio:"我說陳昱傑醫師，是骨科與疼痛雙專科的醫師，擁有CIPS國際介入性疼痛治療證照，目前是台鋼獵鷹籃球隊的合作診所/隊醫",
+    products:"用品、藥物",
+    dream:"科技AI",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"魏銘政",
+    dept:"神經外科",
+    group:"神經科",
+    unit:"睿豊診所",
+    title:"院長",
+    bio:"https://www.drweineurosurgery.com/",
+    products:"皆可考慮、醫藥為主",
+    dream:"夢幻項目",
+    fb:"https://www.facebook.com/fazen.tw",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"許瑛倢",
+    dept:"耳鼻喉",
+    group:"耳鼻喉科",
+    unit:"台北慈濟",
+    title:"主治醫師",
+    bio:"許瑛倢醫師，專注睡眠醫學、鼻呼吸與睡眠抗老議題，擅長將專業醫療知識轉化為溫暖易懂的健康內容。長期經營「好呼吸好睡眠」社群，致力推廣高品質睡眠、呼吸健康與現代人的身心恢復力。",
+    products:"和睡眠 呼吸的相關用品",
+    dream:"眠豆腐 丹普 garmin",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"呂弘鈞",
+    dept:"耳鼻喉科、小兒科雙專科、醫美工作經驗",
+    group:"耳鼻喉科",
+    unit:"光田醫院耳鼻喉部",
+    title:"主治醫師",
+    bio:"我是呂弘鈞醫師（Dr. Will），現任耳鼻喉科暨小兒科雙專科醫師，目前於醫院擔任主治醫師，同時也持續投入醫學美容領域的臨床工作。\n\n在臨床第一線的經驗中，我長期面對的是0到成人不同年齡層的患者與家庭，也因此更能理解大眾在健康、育兒與外在照護上的真實需求與焦慮。我習慣將專業醫療知識轉化為「一般人聽得懂、用得到」的內容，透過社群平台分享診間觀察與實用衛教，建立起具有信任感的個人品牌。\n\n我的內容核心不只是「知識傳遞」，而是希望讓醫療變得更有溫度——讓非醫療背景的受眾，也能感受到被理解與被照顧。\n\n目前主要經營 Instagram（bettercall_will）與 Facebook「呂弘鈞醫師 Will Lu」，內容涵蓋耳鼻喉科、小兒科與醫學美容，並結合生活觀察、親子視角與臨床故事，打造專業且具親和力的醫師形象。\n\n在品牌合作上，我重視內容的真實性與長期信任關係，傾向以「醫師觀點＋使用情境」的方式呈現產品，讓推薦不只是曝光，而是能被理解、被記住、甚至被信任。\n\n期待能與理念相近、重視品質與價值的品牌，一起創造對消費者真正有幫助的內容。",
+    products:"藥品、保健品、空氣清淨機、居家消毒、親子相關、旅遊相關",
+    dream:"醫美產品代言",
+    fb:"https://www.facebook.com/share/1G6wqsuZXN/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/bettercall_will?igsh=MThseWd6cWR2ZmR2OA%3D%3D&utm_source=qr",
+    other:"",
+    card:"https://taplink.cc/bettercal_will"
+  },
+  {
+    name:"彭馨儀",
+    dept:"家庭醫學科",
+    group:"家庭醫學科",
+    unit:"長安醫院",
+    title:"主治醫師",
+    bio:"請參考下列網站連結\nhttps://www.notion.so/2026-04-28-bdaa97beca8a82d8b0748130f48c7aa4?source=copy_link\n\n\n# 彭馨儀醫師個人學經歷\n\n## 關於我 About Me\n\n你好，很高興認識你！我是 **彭馨儀醫師**。\n我從對如何打造健康生活充滿熱忱！十年來我以科學專業為基礎，結合溫暖的溝通技巧，協助無數尋求健康減重的人。擅長打造人人可輕鬆做到的不復胖生活提案。\n\n---\n\n### 🎤 演講與媒體受邀\n\n- **國泰健康家培育計劃 2026講師**\n- **寶島聯播網 受邀來賓**\n    - [減肥什麼都可吃：醫師教妳82靈活飲食法則](https://www.youtube.com/watch?v=Y4-9m6MIGUQ)\n    - [5分鐘減肥料理術](https://www.youtube.com/watch?v=X5BzngS7wSQ)\n- **醫師好辣 受邀來賓**\n    - [知名大學研究揭秘，加工食物會改變大腦](https://youtu.be/ND7CxIAxGZk?si=Nxx7-8KLF7nG6X1p&t=2036)\n    - [壞膽固醇小超標，小心這種疾病找上身](https://youtu.be/GfJgiwGwbZo?si=tO4JcnU0gcmzdpWi&t=888)\n- **聯合報、自由時報採訪醫師**\n    - [運動不用一次到位 抖腳、做家事、站著說話都能增加熱量消耗](https://health.udn.com/health/story/6032/9340341)\n\n### 品牌代言與合作：\n\n- **【善存三效順暢益生菌 代言人】年度代言人 (2023~2025)**\n    - 信賴與專業的選擇，守護您的健康。\n    - [🎬 善存三效益生菌 2024](https://www.youtube.com/watch?v=0UgSj1quADg)\n\n### 🌟臨床醫療事業\n\n- ✨ 專精特色：\n減重門診：Line群組陪跑，不復胖生活提案與藥物精準諮詢\n三高照護：糖尿病、高膽固醇、高血壓藥物與生活諮詢\n\n- 糖尿病共照網認證醫師\n- 中華民國肥胖症專科醫師\n- 長安醫院健檢中心與家醫科主治醫師\n- 台大家庭醫學科總醫師\n- 台大醫學系畢業",
+    products:"藥物、保健食品",
+    dream:"pfizer、GSK等藥廠",
+    fb:"https://www.facebook.com/Dr.HealthPeng",
+    ig:"https://www.instagram.com/dr.health.peng/",
+    other:"https://www.youtube.com/@drhealthpeng",
+    card:"https://taplink.cc/drpeng"
+  },
+  {
+    name:"李宜靜",
+    dept:"中醫",
+    group:"中醫科",
+    unit:"雲玖中醫診所",
+    title:"院長",
+    bio:"我是李宜靜醫師，中西醫雙證照醫師，臨床超過 10 年。\n我平常分享的不只是醫療專業，還有女性成長、自然抗老、育兒思維，以及身為醫師在職涯、品牌與生活之間，如何走出自己的節奏。\n\n我的內容一半來自診間，一半來自真實生活。\n我喜歡把看似艱深的醫學知識，說成大家聽得懂、做得到、也願意留下來看的內容；也常和醫師學弟妹分享職涯選擇、個人品牌經營，以及專業如何真正轉化成影響力。\n\n如果你想認識的是一位有專業底氣、內容溫度，且能把知識說得有感又有畫面的合作對象，那很高興認識你。",
+    products:"不要保健食品！想要美顏抗老相關！美感質感！",
+    dream:"無限想像",
+    fb:"https://www.facebook.com/share/1J4roryA76/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/dr.yijing?igsh=cnNrdmZidmNzbDZp&utm_source=qr",
+    other:"https://www.threads.com/@dr.yijing?igshid=NTc4MTIwNjQ2YQ==",
+    card:""
+  },
+  {
+    name:"胡怡萱",
+    dept:"皮膚科",
+    group:"皮膚科",
+    unit:"亮晴皮膚專科診所",
+    title:"院長",
+    bio:"皮膚專科醫師\n🌳醫師 aka 二寶媽\n✅皮膚科疾病治療\n✅醫學美容：光電雷射、肉毒注射、電音波、微整形、水光針\n✅知名健康節目 【醫師好辣】醫師團，以及全民星攻略、健康零距離、健康好生活、健康有方...等節目醫師。\n✅經營自媒體FB/IG，電視、廣播/podcast、自媒體、直播、實體衛教講座均有經驗。\n✅肌膚健康相關產業異業合作",
+    products:"皮膚保養品、保健食品、親子用品，和皮膚有關的生活用品(例如：濕紙巾、空氣清淨機等)",
+    dream:"舒特膚、理膚寶水、雅漾",
+    fb:"https://www.facebook.com/skindrhu/",
+    ig:"https://www.instagram.com/skindrhu",
+    other:"https://www.threads.com/@skindrhu",
+    card:""
+  },
+  {
+    name:"黃天佑",
+    dept:"肝膽胃腸科/減重專科/功能醫學",
+    group:"消化內科",
+    unit:"全裕診所",
+    title:"院長",
+    bio:"https://www.youtube.com/watch?v=N2QFNQQgidU\nhttps://www.youtube.com/watch?v=YC-A9gyeL4s\n科學人訪談和自傳訪談",
+    products:"藥品/食品/生活用品",
+    dream:"美食代言/保健品代言",
+    fb:"",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"楊為傑",
+    dept:"兒科",
+    group:"小兒科",
+    unit:"平安聯合診所",
+    title:"負責人",
+    bio:"https://twkid.com/about-me/",
+    products:"親子產品、旅行、飛行相關行業與產品。",
+    dream:"星宇航空。長榮航空。",
+    fb:"https://www.facebook.com/ourtwkid",
+    ig:"https://www.instagram.com/twkid_go/",
+    other:"https://www.threads.com/@twkid_go",
+    card:"https://twkid.com/about-me/"
+  },
+  {
+    name:"何建輝",
+    dept:"胸腔內科/呼吸道治療",
+    group:"胸腔內科",
+    unit:"安南醫院",
+    title:"內科加護病房",
+    bio:"可以見官網https://www.chestdrho.com/blank-1",
+    products:"居家電器，親子、空氣污染防治硬體",
+    dream:"空氣清淨機大廠",
+    fb:"https://www.facebook.com/share/1GwCjgBSj2/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/chestdrho?igsh=MWUyOW0xYnk1amtsYw%3D%3D&utm_source=qr",
+    other:"https://www.threads.com/@chestdrho?igshid=NTc4MTIwNjQ2YQ==",
+    card:"https://taplink.cc/chestdrho"
+  },
+  {
+    name:"周余諭",
+    dept:"整形外科",
+    group:"整形外科",
+    unit:"左營總醫院",
+    title:"主治醫師",
+    bio:"以下版本可直接使用：\n\n我是一名整形外科專科醫師，同時經營自媒體品牌「美神周大」，長期分享醫學美容、整形觀念、保養知識與生活美學內容。我的特色是用專業但好懂的方式，拆解大眾關心的變美議題，讓醫療知識不再艱澀，也讓觀眾能更理性選擇適合自己的療程與產品。\n\n我的受眾以重視外貌管理、保養、醫美與高質感生活的女性為主，內容風格兼具專業度、親和力與幽默感。期待與理念相近的品牌合作，創造有信任感、有教育價值，也能真正打動消費者的內容。",
+    products:"用品、保健食品、美容保養品",
+    dream:"知名化妝品牌或保養品牌",
+    fb:"https://www.facebook.com/share/1HUMdMNYeK/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/psdr.yuyu.chou",
+    other:"https://chousbeauty.my.canva.site/eyebags",
+    card:"https://linkgoods.com/yuyuchou"
+  },
+  {
+    name:"邱媛貞",
+    dept:"中醫師",
+    group:"中醫科",
+    unit:"御仁堂中醫診所（桃園）",
+    title:"院長",
+    bio:"我是一名中醫師，於醫學中心接受完整的中西醫訓練，研究所畢業後，從醫院臨床到現在創立在桃園的御仁堂中醫診所，共有10年以上的看診經驗，專精研究在兒童神經醫學與失眠自律神經失調領域，由於家中有位注意力不集中的女兒，更能同理家長的辛苦與痛點，專業溫暖的診療與建立家長的信任是我的責任與信念，也常常有許多感人的醫病親子互動的診間故事，我期許這份良善的醫者信念，與中醫治療的面向與優勢，讓更多人看見。",
+    products:"長期投入於兒童神經發展、身長發育健康促進、親子關係建立的醫療方向，身為中醫師，希望能以自然順應的療法為主，如有對於兒童生長發育或益於穩定腦神經的保健品，在評估與詳細了解後，很願意合作推廣。",
+    dream:"1.首專長: 國際母嬰與兒童健康品牌：專業醫師與同理心母親的雙重背書。針對含有 DHA、神經鞘磷脂等有助於大腦發育的兒童營養品，提供中西醫結合的營養與照護建議。2. 次專長: 自律神經系統調整(擅長透過中醫診療分析體質，從而改善腦部壓力狀態，維持高品質睡眠與提升創造力)，可以提供企業主管或員工專屬的抗壓養生課程)，將穿戴裝置收集的數據（如心率變異度 HRV、睡眠週期、血氧），提供分析高科技人員壓力值的數據，從而客製化建議調理模式與治療療程。3. 大型餐飲集團的健康顧問: 如:孕婦友善的無咖啡因草本飲、減重族群的代謝茶飲怎麼喝、結合星巴克提倡的「第三空間」，融入中醫衛教文宣或講座。",
+    fb:"https://www.facebook.com/share/1BLjJWBg4D/",
+    ig:"https://www.instagram.com/yurentang.clinics?igsh=NDA4d2lvaHNqYjdl",
+    other:"https://youtube.com/@yurentang.clinics?si=Za0t5SjCQwBa5aOI",
+    card:"https://glowing-sherbet-9f2532.netlify.app"
+  },
+  {
+    name:"許鈺敏",
+    dept:"小兒遺傳與新陳代謝科",
+    group:"小兒科",
+    unit:"北醫附醫",
+    title:"主治醫師",
+    bio:"我是北醫兒科遺傳暨內分泌主治醫師，同時具備資料科學碩士背景。我相信「數據驅動健康」，在臨床上專注於複雜的基因變異與生長發育解析；在大眾推廣上，我透過出版專書與撰寫親子天下專欄，將生醫數據轉化為現代家庭的科學健康管理策略，並且從實證醫學角度出發，協助孩子健康放鬆成長、協助可能患有遺傳疾病的家族終結隨時有不知名疾病發作的恐懼。",
+    products:"高階兒童成長與生理檢測穿戴式裝置、預防醫學與個人化基因檢測服務、具嚴謹數據支持的特殊醫療營養品",
+    dream:"具備嚴謹臨床數據與實證醫學的特殊醫療級營養品、或是高階基因檢測",
+    fb:"https://www.facebook.com/grow180",
+    ig:"",
+    other:"https://www.pregrowth.com.tw/",
+    card:"https://linktr.ee/dr180"
+  },
+  {
+    name:"周維薪(大象醫師)",
+    dept:"婦產科 功能醫學",
+    group:"婦產科",
+    unit:"初悅婦研婦產科診所",
+    title:"院長",
+    bio:"https://elephantalkshow.com/about/",
+    products:"家用 化妝品 保養品 電子產品(耳機 運動用品, 因為我有在健身",
+    dream:"亞培備孕膠囊",
+    fb:"",
+    ig:"https://www.instagram.com/elephantalkshow?igsh=ZWt6emp0NjVmYjFx",
+    other:"https://www.threads.com/@elephantalkshow",
+    card:"https://portaly.cc/drelephant?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAb21jcAReXUhleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAafiOhLYck5FYIuVkzpS0SiiQcQHDo0rvA4x-GLt8CpXcJl1pqaX_ltNT4ix_Q_aem_v9gkWmu_OCvPcwB9qdJT4A&utm_id=97760_v0_s00_e0_tv3_a1denngxtuvpkq"
+  },
+  {
+    name:"蘇怡甄",
+    dept:"小兒科",
+    group:"小兒科",
+    unit:"羅東的小兒科診所",
+    title:"主治醫師",
+    bio:"我是蘇怡甄醫師，兒科醫師，同時也是一位母親。以溫柔、易懂的方式分享兒童健康與育兒觀點，建立具信任感的社群連結。\n\n曾合作品牌包含：幫寶適尿布（2024、2026），永光明葉黃素、綠綠好日空氣濾網、嬰幼兒奶粉、嬰幼兒益生菌等產品。\n\n期待與理念相近的品牌合作，為家庭帶來安心且有溫度的選擇。謝謝。",
+    products:"親子產品，繪本，書籍，嬰幼兒產品（護膚乳液，沐浴乳，屁屁膏，嬰幼兒毯），對抗的過敏的（空氣清新機、除濕機、濾芯濾網、益生菌），防蚊液，奶粉尿布，舒緩腸胃不適的電解液，等等",
+    dream:".",
+    fb:"https://www.facebook.com/share/18jNUo9qMY/",
+    ig:"https://www.instagram.com/drsuyicheng?igsh=M2NubTZqZXd6MGtq",
+    other:"",
+    card:""
+  },
+  {
+    name:"許芳偉",
+    dept:"骨科",
+    group:"復健／骨科",
+    unit:"健立診所",
+    title:"醫療長",
+    bio:"我是骨科醫師，專長膝關節退化及脊椎問題，現任健立診所醫療長，專做非手術退化關節增生修復及疼痛治療",
+    products:"關節保健品，關節或脊椎產品",
+    dream:"維骨力，UC II",
+    fb:"https://www.facebook.com/share/18bU4WYZD6/",
+    ig:"https://www.instagram.com/dr.hsu_fangwei?igsh=MTY2N2plNXZ5bzk3Mg==",
+    other:"https://www.threads.com/@dr.hsu_fangwei",
+    card:""
+  },
+  {
+    name:"陳昭安",
+    dept:"外科, 泌尿科",
+    group:"泌尿科",
+    unit:"昭安泌尿科診所",
+    title:"院長",
+    bio:"防疫尖兵：淋病通報數台中第 1、全國第 4\n 雙專科認證：外科、泌尿科雙專科醫師\n★ 性病預防與治療：性病篩檢、菜花HPV疫苗、PLT凍晶回春\n★ 男性精準手術：包皮、結紮、增大增粗\n★ 科技美學與逆齡：海神除毛、低能量震波、男性荷爾蒙調理\n★ 私密體態雕塑：磁波儀緊緻、腹肌鍛鍊、減重療程\n★ Cialis、Nebido, Procela講師, 科林睡得美合作醫師, TENGA合作醫師, 船井生醫合作醫師",
+    products:"不犯法都可以",
+    dream:"奢侈品",
+    fb:"https://www.facebook.com/minioperatingroom/?locale=zh_TW",
+    ig:"https://www.instagram.com/dr_zhaoan/",
+    other:"https://www.threads.com/@dr_zhaoan",
+    card:"https://www.morninguro.com.tw/product-74.html"
+  },
+  {
+    name:"曾琴雁",
+    dept:"物理治療（成人與兒童、青少年脊椎側彎專科）",
+    group:"復健／骨科",
+    unit:"挺立康側彎醫療",
+    title:"創辦人暨總院長 / 亞太區 BSPTS 國際脊椎側彎認證講師",
+    bio:"我是曾琴雁，挺立康醫療體系創辦人暨總院長，具備超過十年以上專科復健臨床經驗（曾任職於台北榮總），同時是亞太區 BSPTS（巴塞隆納脊椎側彎治療學院）國際認證講師。\n我深耕成人、兒童與青少年脊椎側彎的保守治療，帶領旗下醫療團隊建立亞洲首屈一指的標準化矯正體系，並常年於澳洲、義大利、西班牙等地進行國際醫學交流與教學。我的病患家長群體具備極高的健康意識與消費力，對於孩子的生長發育、脊椎力學防護與營養補充有著最嚴格的要求。\n我的臨床核心理念不僅是「治療」，更在於「預防與日常賦能」。我能為優質的人體工學產品與營養補充品提供最具權威性、科學實證的醫療級背書，將產品機能精準轉譯為家長的剛性需求，為品牌創造無可取代的信任壁壘與高端市場影響力。",
+    products:"ex 藥物、用品、親子產品，專注於兒童、青少年與成人脊椎健康的高階品牌。可接受的合作項目包含： 1.\t高階人體工學用品：成長型護脊書包、動態人體工學椅、精密護脊床墊、機能護具。 2.\t骨骼發育與營養保健品：高吸收率鈣質補充品、維生素D、兒童/青少年生長關鍵營養素。 3.\t醫療級體態評估設備與科技輔具。 4.\t高端親子健康與生活風格品牌。 （備註：僅與具備科學實證、重視力學設計或具高度研發熱忱的優質品牌合作。）",
+    dream:"頂級人體工學品牌（如：Herman Miller、Tempur丹普、Fjällräven北極狐護脊系列）、國際指標性營養保健大廠（如：雀巢健康科學、大廠牌高階歐美鈣質/維生素D）、以及 Apple 健康生態系相關的數位醫療應用。期望透過國際級權威的臨床背書，聯手打造脊椎防護的業界天花板",
+    fb:"https://www.facebook.com/share/1D7RVFXMyC/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/scoliosismaster?igsh=Y2dwOGZqMzA0Mjd1&utm_source=qr",
+    other:"https://www.threads.com/@scoliosismaster?igshid=NTc4MTIwNjQ2YQ==",
+    card:"https://linktr.ee/scoliosismaster?utm_source=linktree_profile_share&ltsid=e33f9217-17e0-4e26-b011-7705e4fe2146"
+  },
+  {
+    name:"周建存",
+    dept:"急診專科",
+    group:"急診科",
+    unit:"存奕美學診所",
+    title:"院長",
+    bio:"周建存醫師, 為存奕美學診所總院長\n\n學歷：\n高雄醫學大學醫學系\n\n主要經歷：\n台北馬偕醫院急診專科主治醫師\n台灣抗SARS醫師\n中國莎蔓莉莎醫美集團, 虞美人國際集團微整形院長\n\n專業認證與專長（部分）：\n台灣肥胖專科醫師\n台灣急診醫學科專科醫師\n台灣抗衰老再生醫學會理事\n中華民國美容醫學會專科醫師\nESG胃鏡縮胃（胃縫合）原廠認證\nPOSE 2.0胃鏡縮胃 （胃縫合）原廠認證\n\n周醫師在肥胖專科、胃鏡減重、美容醫學及抗衰老再生醫學等領域有豐富的經驗和專業認證。\n\n存奕美學診所地址:\n台北店: 台北市中山區中山北路二段52號3樓\n桃園店: 桃園市桃園區中正路1223號3樓\n營業項目: 專業減重, 胃鏡減重(胃肉毒, 胃水球, 胃縫合), 醫學美容, 健康管理(血液淨化, EECP, 靜脈雷射)\n\n1995-2002年, 就讀高雄醫學大學醫學系\n2002-2006年,  在台北馬偕醫院急診專科住院醫師訓練\n2003年, 在急診室照顧SARS病患時被傳染SARS, 但後續順利康復, 從此體會到健康的重要, 也開始進行預防醫學的研究\n2005 年, 考取中華民國急診專科醫師執照\n2006-2009年, 升任台北馬偕與新竹馬偕醫院急診專科主治醫師\n2009-2011年, 感念在急診室看到許多生離死別的場景, 如果我能在這些急重症疾病發生前就開始早期介入預防, 是不是可以幫助更多人, 所以離開馬偕醫院到雅德麗生活診所擔任主治醫師\n在雅德麗診所工作期間, 開始進行大量肥胖臨床工作. 因診所的主要項目就是經營專業減重, 健康管理, 有大量減重客人, 所以我也從中學習到減重門診的流程. 印象最深刻的是, 曾經是幫助一個100多公斤的女性病患, 她本身 是保險業的高階主管, 因工作壓力大, 飲食不正常, 所以合併有高血壓, 高血脂, 原本該病患因多囊性卵巢症候群跟先生結婚多年, 一直無法懷孕, 也因此還去孤兒院領養孤兒, 但我幫她慢慢調理下, 她瘦到60多公斤, 最後意外懷孕生子, 也把原本的高血壓, 高血脂都解決了, 她非常開心~\n\n2013-2015年, 在美麗好診所工作, 從事減重醫學, 健康管理, 醫學美容\n\n2015-2019年, 全職在在中國虞美人國際集團, 莎蔓莉莎美容集團擔任微整形美容醫師.\n\n2019年, 成立存奕美學診所桃園店, 先前的減重臨床經驗幫助了很多病患, 我很開心能讓他們恢復健康. 也因為在急診室鍛鍊的外科底子也讓我從事微整形注射, 也得到眾多大陸貴婦的好口碑, 所以診所營業項目主要是減重醫學, 健康管理, 醫學美容. 因累積多年自費醫療臨床看診經驗, 熟悉跟自費客人的互動模式, 也同步整合在大陸美容機構工作學習到的優點, 客人越來越多. 在2021年時, 開始把診所的核心經營業務放在我擅長的專業減重管理服務流程中, 搭配營養師, 健康管理師一起協助, 醫美服務項目為輔, 也慢慢在桃園減重市場建立品牌知名度. \n\n2023年, 存奕美學診所台北店成立, 為服務許多從台北遠道而來的客人, 成立存奕美學診所台北店.  同步推廣胃肉毒, 胃水球, 胃縫合療程, 累積非常多成功案例, 讓客戶不用切除器官, 降低副作用, 享受到到媲美外科切胃受術的減重效果. 也開始在TVBS 健康2.0節目成為固定來賓, 分享減重, 健康觀念~\n\n未來, 期許存奕美學診所繼續做好服務, 用醫療專業幫助更多客人, 繼續維持google 5星評論好口碑, 成為北台灣”專業減重, 胃鏡減重, 健康管理, 體態雕塑”的好品牌!",
+    products:"各種新的減重療程, 代謝症候群(血糖 血脂 血壓防治), 心血管保健, 有實證醫學證實有效的項目",
+    dream:"如像善存, 或大江生醫在市場上已經建立口碑的好品牌",
+    fb:"https://www.facebook.com/drglowbeauty?mibextid=wwXIfr&rdid=3kpSgj265lR65uY7&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1EDi6uY44e%2F%3Fmibextid%3DwwXIfr#",
+    ig:"https://www.instagram.com/drglow888?igsh=MXFkd24wenVuY3VobQ==",
+    other:"https://drglowbeauty.com.tw/category/news/media",
+    card:""
+  },
+  {
+    name:"邱文瑾",
+    dept:"新陳代謝糖尿病，減重，醫美皮膚",
+    group:"新陳代謝／內分泌科",
+    unit:"曜妍診所",
+    title:"院長醫生",
+    bio:"邱文瑾醫師為內科與內分泌專科醫師，現任曜和本質美學集團創辦人暨曜妍診所總院長，擁有超過十年以上臨床與醫美整合經驗。專長於代謝調理、功能醫學、醫學美容與抗老治療，致力於建立「以代謝為核心」的整合式醫療模式。邱醫師同時為《健康好生活》節目錄影醫師、未來更年期主題頻道之主講人，並擔任醫學會講師，長期參與專業教育與跨領域分享。其風格以科學實證、安全與個人化評估為核心，兼具臨床深度與市場洞察，能有效整合醫療專業與品牌策略，為合作夥伴創造長期價值。",
+    products:"藥物，產品，頻道，醫學知識",
+    dream:"減重減脂相關，抗老相關",
+    fb:"https://www.facebook.com/share/182VUW2rSE/",
+    ig:"https://www.instagram.com/carebeautyclinic?igsh=ZXQ5cDJqbHJ3YzA0",
+    other:"https://www.youtube.com/@wenm1011230",
+    card:"https://linktr.ee/dr.chiu.healthybeauty?utm_source=linktree_profile_share&ltsid=530d4645-69bf-47de-8b6a-5ea6580e8add"
+  },
+  {
+    name:"陳依君",
+    dept:"家醫科",
+    group:"家庭醫學科",
+    unit:"崙背台全診所",
+    title:"醫師",
+    bio:"我是家醫姊，一位家庭醫學科專科醫師。\n專注於用「生活化、好理解的方式」，讓醫療不再有距離。\n擁有安寧緩和、針灸、肥胖醫學與慢性病整合照護等多元臨床經驗，\n致力將專業醫療知識轉化為民眾真正「做得到」的健康行動。",
+    products:"若有適合的項目都可以討論",
+    dream:"沒有特定項目",
+    fb:"https://www.facebook.com/FMsischun",
+    ig:"https://www.instagram.com/fmsis_chun/?utm_source=ig_web_button_share_sheet",
+    other:"",
+    card:"https://taplink.cc/drchun"
+  },
+  {
+    name:"鄭丁靚",
+    dept:"高齡醫學科",
+    group:"高齡醫學科",
+    unit:"診所",
+    title:"主治醫師；中華民國診所協會全國聯合會副秘書長",
+    bio:"鄭丁靚 / 叮噹醫師（Dr. TingTang）\nMBBCh・MRCP UK・高齡醫學專科。英國與台灣兩地臨床執業逾 20 年，從 NHS 醫學中心走到台灣本土社區，看過最完整的老化光譜——從 40 歲開始走樣的代謝，到 80 歲還能自己走路的長者。這份臨床縱深，讓我能把「老化」這件事用大眾聽得懂的語言拆給社會看。\n\n【品牌定位｜不只是醫師，是「長壽佈局的總設計師」】\n提出原創「三大健康斷崖」理論——44 歲代謝、60 歲免疫與肌肉、78 歲認知——主張在斷崖來臨前介入，是成本最低、效益最高的策略。以 9S 長壽九大支柱（Sleep・Stress・Strength・Sustenance・Sharpness・Sensitivity・Social・Strategy・Survey）為操作框架，把抗老從口號變成可執行的人生劇本。\n\n【差異化｜西方實證醫學 × 兩千五百年中華養生智慧】\n是市面上少數能同時引述 RCT 數據與《黃帝內經》而不違和的醫師 IP。語調溫暖權威，不做養生玄學、不恐嚇行銷，講求科學數據＋生活落地。\n\n【媒體與內容戰力】\n・節目主持｜《挺健康》主持人，社群 8 萬粉絲。具備鏡頭、節奏、來賓帶位、議題設計的完整節目經驗，是少數能「上得了節目，也駕馭得了節目」的醫師 IP。\n・自媒體經營：叮噹醫師 IG / FB / 官網（drtingtang.com）穩定產出深度長文與短影音，主力受眾為 35–55 歲高知識民眾。\n・產品線：中高價線上課程購置中。\n・講者實戰：學術會議、商業講座、公益演講、企業內訓皆已落地；中英文雙語切換自如。\n・內容能力：能把醫學論文翻成上班族秒懂的人話，把功效宣讀升級成「長壽佈局」敘事。\n\n【廠商可期待的合作價值】\n1. 長壽 / 抗老 / 高齡 / 中年男女健康類（含男性更年期、女性更年期、肌少症、代謝症候群、心血管、骨質疏鬆等）：醫師 IP 與品牌調性高度契合，背書力＋說服力雙強。\n2. 跨界整合：保健品、穿戴裝置、健康科技皆可包進「長壽佈局」內容敘事，不只是貼牌曝光。\n3. 節目資源：《挺健康》8 萬粉絲社群可作為品牌曝光的延伸通道，具備醫師 IP × 節目流量的雙引擎。\n4. 國際視野：英國 MRCP 與英國執業背景，在進口品牌、跨境合作、雙語溝通上具天然優勢。",
+    products:"與長壽、抗老、健康相關的品類最對口｜① 家居健康類：防霾紗窗、智能燈光、空氣清淨、淨水 ② 睡眠與放鬆：床墊、寢具、眼罩、助眠科技 ③ 運動與肌力：訓練器材、恢復裝置（按摩槍、筋膜槍類）、健身房合作 ④ 可穿戴健康裝置：智慧手錶、CGM 連續血糖機、健康監測科技 ⑤ 健檢與精準醫療：健檢中心、基因檢測、精準營養 ⑥ 中年男女健康：更年期、骨密度、肌少症、代謝症候群相關產品與檢測 ⑦ 教育出版：書籍、線上課程、講座、知識型內容合作 ⑧ 廚房料理：地中海飲食食材、藥食同源、料理工具｜不接：菸酒、極端減重、無實證偏方、與「長壽佈局」立場衝突的商品。",
+    dream:"【內容媒體類・最想敲門】《早安健康》——希望以「長壽佈局」專欄作家身份建立深度合作，把三大健康斷崖、9S 框架系列化，讓更多 35+ 族群在斷崖來臨前提早部署。｜【品牌長期合作・最想敲門】永悅健康——希望就「長壽佈局」相關產品線展開深度合作，從產品教育、衛教內容、聯名課程到長期顧問皆可談。｜【其他夢想清單】高端穿戴：Apple Watch、Oura、Garmin｜恢復科技：Hyperice、Therabody｜營養品牌：Thorne、雀巢健康科學、亞培｜出版社：天下文化、商周出版、遠見天下的長壽抗老主題書｜媒體：TVBS《健康 2.0》、知識型 Podcast 深度專訪。",
+    fb:"https://www.facebook.com/Drtingtang/",
+    ig:"https://www.instagram.com/dr.tingtang/",
+    other:"",
+    card:""
+  },
+  {
+    name:"王曜",
+    dept:"耳鼻喉科、航空醫學專科",
+    group:"耳鼻喉科",
+    unit:"建良耳鼻喉科診所",
+    title:"副院長",
+    bio:"我是王曜醫師，耳鼻喉頭頸外科專科醫師，也是航空醫學專科醫師。\n\n過去曾任空軍航空醫學官、國軍花蓮總醫院耳鼻喉科主任，也在三軍總醫院接受完整訓練。因為航空醫學背景，我習慣用「飛安等級」的標準看待健康：不是只處理眼前症狀，而是找出背後原因，讓身體重新回到穩定狀態。\n\n我主要關注鼻過敏、鼻塞、耳鳴、打鼾、睡眠呼吸問題、感冒久咳與呼吸道疾病，也希望用清楚、生活化的方式，幫助大家理解自己的身體，不再只是反覆吃藥、反覆擔心。\n\n在我的粉專，我會分享耳鼻喉健康知識、航空醫學觀點，以及日常可以真正用得上的照護方法。\n\n希望讓每個家庭、每位空勤與需要照顧自己的人，都能更安心、更有效率地面對健康問題；用飛安等級的標準，守護你的呼吸、聽力與生活品質。\n\n參考粉專公開資訊：耳鼻喉頭頸外科專科醫師、航空醫學專科醫師，專精鼻過敏治療、睡眠中止、耳鳴、打鼾、聽力問題及呼吸道疾病等。",
+    products:"藥物、居家及生活用品、親子產品、教育相關、情緒價值小物",
+    dream:"航空相關代言(長榮、星宇等等)",
+    fb:"https://www.facebook.com/DrAirForce",
+    ig:"https://www.instagram.com/acheron1129?igsh=MTVsOWY4MWE4OXRkcg%3D%3D&utm_source=qr",
+    other:"",
+    card:""
+  },
+  {
+    name:"林建佑",
+    dept:"牙醫",
+    group:"牙科",
+    unit:"桃園京鼎牙醫",
+    title:"院長",
+    bio:"我是自己幫自己植牙的 MVP 牙醫，林建佑醫師，也是桃園京鼎牙醫診所的院長。\n\n我的專長是 All-on-4 跟導航植牙。\nAll-on-4 就是讓你從全口無牙的狀況，只要一次的手術，就能恢復基本的美觀與功能。\n早上來手術，傍晚就可以裝上固定的臨時假牙，回家享用晚餐。\n\n我從不強迫推銷，我秉持的治療理念就是：\n1. 用親切的態度來降低你對牙科的恐懼\n2.用傾聽的態度瞭解你的治療需求\n3. 用清楚的說明來讓你知道各個方案的優缺點，然後讓你做出最適合自己的選擇\n\n如果你自己或周邊的親人有缺牙、植牙的需求，歡迎推薦給我們，我會像照顧自己家人一樣好好照顧他！",
+    products:"親子產品，牙刷牙膏沖牙機牙線，",
+    dream:"tesla，自駕科技可聯結導航植牙",
+    fb:"https://www.facebook.com/mvpDentistLin",
+    ig:"https://www.instagram.com/mvpdentistlin?igsh=aGI2ZnNxamh5MnBt&utm_source=qr",
+    other:"https://linktr.ee/mvpdentistLin?utm_source=linktree_profile_share&ltsid=2e8e58bd-7097-44f8-9884-789792248154&utm_term=line%E5%90%8D%E7%89%87",
+    card:"https://linktr.ee/mvpdentistLin?utm_source=linktree_profile_share&ltsid=2e8e58bd-7097-44f8-9884-789792248154&utm_term=line%E5%90%8D%E7%89%87"
+  },
+  {
+    name:"吳易儒",
+    dept:"一般科醫美",
+    group:"整形外科",
+    unit:"維格診所",
+    title:"醫師/院長",
+    bio:"我是結合芳療與醫美的醫師，臉書粉專目前1.3萬追蹤。同時具有芳療師NAHA證照、阿育吠陀中階療癒師證照與化妝品研究所的碩士學位，主修精油化學。我也是剛生下二寶四個月的產後媽媽，善於陪伴忙碌又辛苦的女性朋友們找回自信與舒適節奏。",
+    products:"精油、香氛、保養、母嬰、親子",
+    dream:"施巴妊娠紋霜、Blueseeds滾珠按摩精油",
+    fb:"https://www.facebook.com/share/1CkWbbcNcW/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/dr.iroo?igsh=MWE2dDRjeG9uZmp1Mg%3D%3D&utm_source=qr",
+    other:"https://health.doctorally.tw/others/2024/dr-iroo-beauty-care-guide/",
+    card:"https://portaly.cc/dr.iroo"
+  },
+  {
+    name:"李俊廷",
+    dept:"中醫",
+    group:"中醫科",
+    unit:"艾苜中醫診所/義守大學學士後中醫學系",
+    title:"院長/兼任講師",
+    bio:"您好，我是李俊廷醫師，現任台南市北區 艾苜中醫診所 (Amulette Chinese Medicine Clinic) 院長，也同時是義守大學學士後中醫學系的兼任講師，同時也重新經營「李俊廷醫師」醫學知識專頁(先前的網頁被ban掉了XD)。\n\n我具備國立陽明大學微生物免疫學碩士的學術背景，這使得我在臨床實踐上，致力於成為「科學中醫的轉譯者」。我習慣打破傳統中西醫的藩籬，結合現代醫學的檢驗數據與中醫的四診，將傳統古籍中抽象的病機，精準對接至「細胞激素」、「神經傳導物質」與「晝夜節律」等現代醫學語彙，提供具備實證醫學基礎的治療方案。\n\n【臨床專長與醫療理念】\n在臨床業務上，我的專長涵蓋過敏免疫疾病、小兒生長發育、自律神經與內科疾患，以及中醫美顏針灸。面對患者，我抱持合作而非對立的態度，經常協助評估患者自身狀況，透過中藥與針灸介入來降低副作用、提升整體療效。\n\n我始終堅信並推廣「三分治，七分養」的醫療哲學。在診間，我們不僅提供精準的醫療處置，更導入「表徵遺傳學 (Epigenetics)」與「藥食同源」的觀念，協助患者從日常作息與飲食中進行健康管理，真正落實「治未病」的預防醫學。\n\n【艾苜品牌精神 (Amulette Philosophy)】\n我所創立的「艾苜中醫」，致力於將中醫診療昇華為一種「優雅的防禦儀式」。我們期許診所能成為現代人在繁忙都市中的「健康護身符」，從舒適安全的就診氛圍到輕柔的針灸手法，全面照護患者的生理與心理健康。\n\n【合作願景】\n無論是學術研討、臨床中西醫共照合作，或是健康生活產業的跨界交流，我都非常樂意以開放、科學且具備人文關懷的視角參與其中。期盼未來能與大家攜手，共同推動更優質、全面的現代醫療照護與健康服務。",
+    products:"中醫相關用品、親子相關用品",
+    dream:"靈芝、冬蟲夏草、人參之類的免疫調節產品",
+    fb:"https://taplink.cc/drctlee",
+    ig:"https://taplink.cc/drctlee",
+    other:"https://taplink.cc/drctlee",
+    card:"https://taplink.cc/drctlee"
+  },
+  {
+    name:"陳奕成",
+    dept:"兒童內分泌科、兒童成長專科",
+    group:"小兒科",
+    unit:"大直美迪婦產科診所",
+    title:"主治醫師",
+    bio:"我是兒童內分泌專科陳奕成醫師，專注於兒童與青少年的生長發育、身材矮小、性早熟、兒童肥胖等內分泌相關疾病。\n\n我經營 Facebook 粉絲專頁 《陳奕成醫師的樂高園地》，長期以家長聽得懂的方式，分享兒童成長、營養、睡眠、運動與青春期發育等健康知識。我的內容特色是將專業醫學轉化成生活化、實用且溫暖安心的衛教內容，協助父母在日常中做出更適合孩子的健康選擇。\n\n我曾與《親子天下》、《嬰兒與母親》、《媽媽經》、《未來 Family》、《BabyHome》、《Heho 親子》、《療日子》等親子健康媒體合作撰文，並著有兒童生長發育專書 《打造黃金發育力》。\n\n在商業合作上，我期待與重視科學依據、兒童健康與家庭信任感的品牌合作，透過專業醫師觀點與親子溝通能力，協助品牌建立更有溫度、更具公信力的健康內容。",
+    products:"親子產品、玩具、成長相關用品",
+    dream:"樂高、籃球活動、足球活動",
+    fb:"https://www.facebook.com/legocyc",
+    ig:"https://www.instagram.com/legox1x/",
+    other:"https://www.youtube.com/@DrCYC-lego",
+    card:""
+  },
+  {
+    name:"劉怡志",
+    dept:"中醫",
+    group:"中醫科",
+    unit:"潤宇堂中醫診所",
+    title:"中醫師",
+    bio:"哈囉大家好！我是一劑中醫，劉怡志中醫師！\n有些人會好奇這個粉專名字的由來～\n當初會想取這個名字第一個原因是跟我的名字有諧音，身為一個台灣人肯定不能錯過諧音梗機會吧😆\n第二個原因也是最重要的：\n在我們中醫有一個「一劑知，二劑已」的說法，臨床醫師最大的感動和快樂，莫過於病人服藥後的反應是：「吃兩三包藥後就很有感覺」，「這裡面有加西藥嗎，怎麼反應這麼快！」若是診斷後能貼切迅速的改善，是我們醫者最深的希望與期盼，同時也是我對自己的期許，對於不是頑疾或難治之症讓病患吃一包藥就能有感，希望行醫的路上能不斷精進自己，帶給大家更好的療效💪",
+    products:"中醫藥相關產品、親子用品、運動用品",
+    dream:"保健食品",
+    fb:"https://www.facebook.com/share/1LxkRRjaHg/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/tcmdr_understand?igsh=MWU1ZHZpZXVtYXg5Yw%3D%3D&utm_source=qr",
+    other:"",
+    card:""
+  },
+  {
+    name:"嚴可倫",
+    dept:"骨科、脊椎外科",
+    group:"復健／骨科",
+    unit:"台中市清水區-安程骨科診所",
+    title:"院長兼設備保養長、水電維修長",
+    bio:"我是骨科醫師、在台北榮總完成五年的專科訓練後，回到台中的光田醫院服務近十年，現在創立了安程骨科診所，用更接地氣的方式來回饋我長大的故鄉。\n\n因為會彈一些吉他，所以自己填詞、改編名曲，來進行民眾衛教，例如：\n\n我只在乎你的骨質與肌力-骨鬆肌少衛教之歌-嚴可倫醫師填詞、演唱(原曲:我只在乎你)\nhttps://www.facebook.com/17bone/videos/1381783939351122\n\n骨頭-骨質疏鬆之歌-嚴可倫醫師填詞、演唱(原曲:家後)\n[https://www.youtube.com/watch?v=B9loE6dL4F](https://www.youtube.com/watch?v=B9loE6dL4F4)\n\n職場上，致力於改善醫護的溝通，努力把醫師的術語、技術，轉化成好懂的方式、教會護理人員，增加默契提升效率，因此連續七年受邀擔任台灣人工關節教育學會的講師；也曾改過一首歌來向民眾傳達護理師的辛苦。\n\n護士真敖-護士節快樂-嚴可倫醫師填詞、演唱(原曲:浪子回頭)\nhttps://www.youtube.com/watch?v=I8QwjVfn3DE\n\n我喜歡做民眾衛教，擅長讓每個聽眾都可以輕鬆學會平時不容易懂得筋骨知識，曾經負責民眾、院內同仁衛教演講近100場(關節、脊椎、骨鬆、做家事的地雷錯誤姿勢...)；與聯合辦一起舉辦元氣講座-骨鬆肌少(200人)；也受台中市捐血中心邀請於表揚大會演講「你捐的血都哪裡去了?」來感謝募血單位、捐血人(800人)。\n\n我喜歡拍影片，用更高的槓桿，去幫助民眾，例如花蓮光復鄉站子超人衛教影片\nhttps://www.facebook.com/share/r/19dnagntzY/?mibextid=wwXIfr\n\n其餘影片請參考粉絲專頁 https://www.facebook.com/17bone/videos\n\n我喜歡寫文章，主題常常環繞著診間故事、還有我與雙寶之間的調皮、溫馨故事，常保自己在對患者、對生活、對家人，能夠維持那一貫的溫度。",
+    products:"骨科相關保健食品(例如治療骨鬆的鈣片、維他命D滴劑，肌少症的蛋白質)；親子飯店、人體工學椅、學童成長座椅、護脊書包、運動器材、咖啡",
+    dream:"特斯拉(同為車主)、維骨力、挺立、克補、善存、桂格、益節",
+    fb:"https://www.facebook.com/17bone",
+    ig:"https://www.instagram.com/warmbonedoctor/",
+    other:"https://www.17bone.com/",
+    card:""
+  },
+  {
+    name:"江佩璋",
+    dept:"泌尿科/外科",
+    group:"泌尿科",
+    unit:"三軍總醫院",
+    title:"主治醫師",
+    bio:"我是江佩璋醫師，泌尿科主治醫師，也是一位專注於「熟齡男性健康掌控感」的醫師型內容創作者。\n許多 45 歲以上男性面對夜尿、頻尿、尿不順、攝護腺焦慮、PSA 異常或性功能下降時，常常不是不在意，而是不知道該問誰、該不該治療、會不會太嚴重、會不會被貼上老化標籤。\n我希望透過專業泌尿評估與清楚衛教，幫助熟齡男性重新掌握睡眠品質、排尿狀態、生活自由與男性自信。",
+    products:"藥物，保健品，成人尿布、保潔墊、男性清潔",
+    dream:"不限",
+    fb:"https://taplink.cc/dr.chiang",
+    ig:"https://taplink.cc/dr.chiang",
+    other:"https://taplink.cc/dr.chiang",
+    card:"https://taplink.cc/dr.chiang"
+  },
+  {
+    name:"林軒任",
+    dept:"腎臟科",
+    group:"腎臟科",
+    unit:"亞洲大學附屬醫院",
+    title:"腹膜透析主任",
+    bio:"一位腎臟專科醫師，幫自己外婆看糖尿病，後來親手幫她放管子開始洗腎時，發現必須透過白話文才能有效傳遞健康知識，於是創建「引人入腎」，透過Podcast節目及YouTube將醫學常識分享給大家，核心是「醫學白話文」，目前podcast破200集，主要受眾是「高齡」「糖尿病」「腎臟病」，",
+    products:"符合高糖腎（高齡，糖尿病，腎臟病）主題的藥品，保健品或輔具，",
+    dream:"Tesla，",
+    fb:"https://www.facebook.com/dr.eli.lin/",
+    ig:"https://www.instagram.com/dr.eli.lin/",
+    other:"https://drelilin.com/ , https://www.youtube.com/@DrEli-xk9ni",
+    card:""
+  },
+  {
+    name:"陳菁兒",
+    dept:"遺傳內分泌科",
+    group:"新陳代謝／內分泌科",
+    unit:"禾馨醫療/新竹沐橙/成長空間診所",
+    title:"醫師",
+    bio:"我是菁兒醫師，遺傳內分泌專科醫師。 我的專長涵蓋身高體重管理、性早熟及青春期評估、骨齡評估與基因檢測。目前在禾馨醫療、成長空間診所及沐橙診所，持續陪伴無數孩子與家庭走過關鍵的發育階段。\n\n我希望將這些專業知識轉化容易理解的語言，分享給需要的人。因為我相信，只有擁有充足的資訊，爸媽才能擁有真正的「醫療選擇權」，不再因未知而焦慮，不再因錯過而懊悔。",
+    products:"清潔健康用品-空氣清淨機、洗手乳、給皂機，食物調理機、運動服飾用品、電子閱讀器、識別卡。 藥品或保健食品（大廠牌）",
+    dream:"Dyson、誠品、讀墨",
+    fb:"https://www.facebook.com/DrJillsGrowingGarden/",
+    ig:"https://www.instagram.com/drjillgrowthgene/",
+    other:"https://www.threads.com/@drjillgrowthgene",
+    card:"https://linktr.ee/jillc2023"
+  },
+  {
+    name:"邱昱勳",
+    dept:"耳鼻喉科/顏面整形外科",
+    group:"耳鼻喉科",
+    unit:"新光醫院",
+    title:"主治醫師",
+    bio:"姓名 :        邱昱勳\n職稱 :       中整協海峽兩岸分會 常務委員\n                   鼻整形委員會 副主任委員\n臺灣耳鼻喉頭頸外科醫學會 顏面整形重建訓練委員會 委員\n臺灣顏面整形重建外科醫學會 理事\n韓國KCCS 醫學雜誌 編輯醫師\n經歷：   \nIFOS, AAFPRS,EAFPS, KCCS, AMWC, IMCAS, IFFPSS, PAAFPRS國際鼻整形講師\n國立台灣大學醫學院附設醫院 耳鼻喉部 教學主治醫師\n中國醫藥大學附設醫院臺北分院 耳鼻喉科 主任\n台北市立婦幼醫院 耳鼻喉科 主任\n振興醫院耳鼻喉科暨醫學美容中心 主治醫師\n \n學歷： 臺大醫學院 臨床醫學研究所 醫學碩士\n       臺大醫及工學院 醫學工程研究所 博士\n       美國芝加哥大學醫學中心 鼻整形手術研究\n \n教職 :  教育部部定講師\n專長：\n1.     客製化鼻整形 ( Tailor-made Rhinoplasty )\na.     微整隆鼻\nb.    結構式鼻整形 ( Structure Rhinoplasty)\n-       功能性鼻整形\n: 鼻閥狹窄\n  空鼻症  ( Empty Nose Syndrome)\n             \n-       美容性鼻整形\n: 全自體軟骨鼻整形、韓式鼻雕、卡麥拉隆鼻\n蒜頭鼻、鷹鉤鼻、朝天鼻、短鼻\n              塌鼻、歪鼻、鼻外傷重建\n                          專精於自體肋軟骨之重修鼻整形\n2.     顏面微整形及雷射\n3. 音聲手術\n研究方向：   組織工程\n榮譽事蹟：\n \n“台灣首位發表\"同時\"進行鼻整形&鼻竇炎手術成功病例醫師” (2011)\n“台灣首位發表自體軟骨鼻整形重建\"小針美容\"成功病例醫師”(2012)\n“台灣首位發表自體軟骨鼻甲整形重建\"空鼻症\"成功病例醫師”(2018)\n \n 台灣“耳鼻喉頭頸外科”醫學會年會優良壁報論文 (2006)\n中華民國“美容醫學”醫學會優秀論文獎 (2017)\n台灣“顏面整形”重建外科醫學會年度論文獎 (2017)\n台灣“顏面整形”重建外科醫學會年度SCI論文獎 (2023)\n台灣“顏面整形”重建外科醫學會年度SCI論文獎 (2024)\n \n \n受邀國際會議鼻整形演講:\n受邀世界五大洲20多國 發表逾百場鼻整形演講及手術示範\n- 亞洲 : 中國, 韓國, 日本, 泰國, 新加坡, 菲律賓, 越南, 印尼, 馬來西亞,\n伊朗, 印度, 阿拉伯聯合大公國\n- 歐洲 : 俄羅斯, 法國, 義大利, 西班牙, 葡萄牙, 土耳其, 愛爾蘭\n- 美洲 : 美國, 巴西, 墨西哥\n- 大洋洲 : 澳大利亞\n- 非洲 : 南非\n \n“台灣首位受邀IFFPSS世界顏面整形大會鼻整形演講醫師”(2012 Rome)\n“台灣首位連續兩年受邀AAFPRS美國顏面整形外科醫學會大會鼻整形演講醫\n師”(2015 Dallas, 2016 Nashville)\n“台灣首位受邀IMCAS國際醫學美容抗衰老大師課程世界大會鼻整形演講醫\n師”(2016 Paris)\n“台灣首位受邀IFOS世界耳鼻喉頭頸外科醫學會大會鼻整形演講醫師” (2017\nParis)\n“台灣首位受邀EAFPS歐洲顏面整形外科醫學會大會鼻整形演講醫師” (2017\nLisbon)\n“台灣首位受邀European ORL-HNS歐洲耳鼻喉頭頸外科醫學會大會鼻整形演講\n醫師” (2017 Barcelona)\n“台灣首位受邀AAFPS澳洲顏面整形外科醫學會大會鼻整形演講醫師” (2018\nPerth)\n“台灣首位受邀保存式鼻整形大會演講醫師” (2020 Nice)\n“台灣首位受邀IFOS世界耳鼻喉頭頸外科醫學會大會發表鼻整形Keynote\nSpeech(長達１小時的主題演講)醫師” (2023 Dubai)\n“台灣目前唯ㄧ受邀Global Masters in Rhinoplasty世界鼻整形大師會鼻整形演講醫師” (2025 Rio de Janeiro)\n\n研發:\n     GlamFace 3D ( 和ASUS合作研發\n為台灣第ㄧ個用於鼻及顏面整形領域的3D",
+    products:"沒什麼禁忌 看感覺",
+    dream:"法拉利😉",
+    fb:"",
+    ig:"",
+    other:"",
+    card:"https://drtonychiu.taplink.bio/"
+  },
+  {
+    name:"梁盛賓",
+    dept:"小兒科",
+    group:"小兒科",
+    unit:"關心 / 沐橙診所",
+    title:"小兒遺傳代謝科主治醫師",
+    bio:"您好，我是梁盛賓醫師，大家也可以叫我大花醫師。\n\n我畢業於輔仁大學醫學系，曾任職於台北榮民總醫院遺傳暨代謝疾病科，擁有小兒科與遺傳代謝次專科的完整訓練背景。目前於新竹市東區執業，專精於兒童生長發育、兒童肥胖與體重管理、性早熟預防與處置，以及各類兒童遺傳代謝疾病的診斷與照護。\n\n在臨床工作之外，我深刻感受到許多家長面對孩子健康問題時，往往充斥著網路上的錯誤資訊與過時觀念。因此，我選擇走出診間，以自媒體創作者的身份，用最貼近生活的語言，將複雜的醫學知識轉化為每個家長都能理解、能應用的實用內容。\n\n我的創作以 Threads 為核心平台，輔以其他社群媒體多管道佈局。內容涵蓋破解育兒迷思、兒童飲食分析、生長曲線解讀，以及探討 GLP-1 受體促效劑（俗稱「瘦瘦針」）等最新醫療趨勢。我始終堅持以實證醫學為基礎、以父母視角為出發點，讓每一篇文章都能真正解決家長的困惑與焦慮。\n\n目前自媒體經營將近一年，粉絲人數已接近 38,000 人，並持續穩定成長中。在內容共鳴度最高的月份，單月瀏覽量最高達到 1,700 萬次，展現出強勁的內容傳播力與高度的受眾黏著度。我的受眾以關心孩子健康的台灣家長為主，是兒童健康、親子育兒領域中精準且高度活躍的族群。\n\n我相信，好的醫療品牌合作，不只是曝光，而是真正為受眾帶來有價值的資訊。我重視內容的專業性與可信度，也擅長將專業醫療知識與品牌訊息自然融合，創造兼顧公信力與傳播效益的優質內容。\n\n期待有機會與您進一步交流合作，共同為更多台灣家庭的健康盡一份心力。\n\n梁盛賓醫師 / 大花醫師",
+    products:"藥物, 營養品, 奶粉, 親子用品",
+    dream:"雀巢（能恩、寶兒）、亞培（心美力、經典）、美強生（優生）、惠氏（S-26、啟賦）、明治及雪印",
+    fb:"https://www.facebook.com/profile.php?id=61566877268833",
+    ig:"https://www.instagram.com/drbigflower/",
+    other:"",
+    card:"https://dr-shengbin-liang.netlify.app/"
+  },
+  {
+    name:"蕭子瑜",
+    dept:"中醫",
+    group:"中醫科",
+    unit:"忠孝昌盛堂、指筌中醫診所",
+    title:"中醫師",
+    bio:"你好，很高興認識你，我是蕭子瑜中醫師。我是一位結合臨床專業與生活風格的中醫師，也期待與品牌創造更有溫度與轉換力的合作。\n\n＊臨床工作上｜結構 × 體質 × 生活整合的中醫師\n目前於指筌中醫診所與忠孝昌盛堂擔任主治醫師，具備中國醫藥大學學士後中醫學系與運動醫學雙背景，我擅長將中醫體質調理 × 結構治療 × 生活美學整合，\n專注於：\n1.顳顎關節障礙（張口咬合疼痛、頭部緊繃）\n2.中醫婦科（經期、內分泌、體質調整）\n3.結構失衡與慢性不適\n同時也關注現代人常見的：\n睡眠困擾、腸胃失調、壓力與自律神經問題\n不只是治療症狀，而是幫助患者把身體的節奏重新拉回來。\n\n＊生活風格上｜把健康活進日常的中醫師\n我熱愛美食、旅遊、運動，也長期關注女性健康與身心靈平衡。",
+    products:"美食、旅遊、運動、漢方草本、女性用品、",
+    dream:"都歡迎可以來討論",
+    fb:"https://www.facebook.com/yu.shiau.39/",
+    ig:"https://www.instagram.com/dr.hsiaoyu/",
+    other:"",
+    card:""
+  },
+  {
+    name:"吳宗穆",
+    dept:"骨科",
+    group:"復健／骨科",
+    unit:"奇美醫院",
+    title:"主治醫師",
+    bio:"骨科脊椎外科醫師",
+    products:"藥物、用品",
+    dream:"tesla",
+    fb:"https://www.facebook.com/share/1CnsCio4UK/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/wtmisurgery?igsh=bzVxdm1ncGg5OGw0&utm_source=qr",
+    other:"",
+    card:""
+  },
+  {
+    name:"胡守丞",
+    dept:"醫美抽脂整型",
+    group:"整形外科",
+    unit:"新顏診所",
+    title:"院長",
+    bio:"我是新顏診所院長，畢業於國防醫學院並於林口長庚完成專科訓練，目前在台北與桃園皆有服務據點，醫療專長為抽脂體雕與眼袋手術。在專業上，我致力於以精準的外科技術幫助患者重塑自信美感；在生活上，我是個熱愛追求極致體驗的實踐者。\n\n除了醫師身份，我擁有 CASI LV1 單板滑雪教練資格，平時熱愛高爾夫球運動、研究高級腕錶，並長期關注美股與投資理財。同時，身為兩位女兒的父親，我也非常重視高質感的生活品味與家庭旅遊的安排。\n\n目前我熟悉社群平台運作，每週固定產出 2-3 支短影音，具備面對鏡頭的從容度與自媒體敏銳度。我的受眾與人設定位非常明確：結合了『專業權威外科醫師』、『高品味質感生活』、『熱血滑雪教練』與『愛家雙寶爸』的多重維度。\n\n期待能與調性相符的醫美/健康產業、高端精品、運動機能品牌與質感生活產業鏈合作，不僅能提供專業的醫療背書，更能創造具說服力且高轉換率的商業價值。",
+    products:"»醫美與大健康：減脂/體雕儀器、術後修復保養品、抗老保健食品、生技產品、專業醫療耗材。    »高階運動與戶外： 高爾夫球具與周邊、滑雪裝備與服飾、高端機能性運動服飾（例如 Lululemon、Macpac 等調性品牌）。    »質感生活與家庭： 適合雙寶爸的高質感育兒/家庭用品、頂級旅遊行程/票券平台體驗、高階車款試駕、精緻餐飲或品酒體驗。    »理財與商務：適合醫師族群的金融理財服務、數位商務平台應用。",
+    dream:"»頂級腕錶與男仕精品： Rolex、Tudor、Patek Philippe 等高級鐘錶品牌，展現外科醫師對精密工藝與美學的極致要求。  »高端運動與汽車品牌： 頂級滑雪裝備、專業高爾夫品牌、Porsche/Benz 等豪華車款品牌合作。  »奢華旅遊與質感生活： 頂級奢華酒店集團、海外高爾夫度假村（如紐西蘭 Millbrook 等同級別）、米其林餐廳/頂級乾式熟成牛排聯名。  »金融理財： 頂尖外商銀行貴賓理財、美股/ETF投資平台合作。",
+    fb:"https://www.facebook.com/FelixERSBbeauty/",
+    ig:"https://www.instagram.com/shesbeauty_dr.hu/",
+    other:"https://www.instagram.com/shesbeauty_tw/",
+    card:""
+  },
+  {
+    name:"劉麗雪",
+    dept:"家庭醫學科專科醫師、老年醫學會專科醫師、糖尿病共同照護網醫師",
+    group:"家庭醫學科",
+    unit:"宏欣診所",
+    title:"院長醫師",
+    bio:"過往作品連結\n大愛電視台 【健康大探索】樂齡藥健康\n擔任醫師來賓-受訪高血壓相關藥物\nhttps://reurl.cc/ZljjeM\n\n大愛電視台【健康大探索】達文西心繞道復原快\n擔任主持人-訪問心臟外科張燕教授\nhttps://reurl.cc/Vm55MR\n\n公視台語兒少台【非常了不起】介紹疫苗注射\n2026/04/01\nhttps://reurl.cc/O66xev",
+    products:"藥物、親子產品",
+    dream:"亞培、Lilly、諾華、諾和諾德",
+    fb:"https://www.facebook.com/liouclinic",
+    ig:"",
+    other:"",
+    card:""
+  },
+  {
+    name:"黃琪琛",
+    dept:"整形外科",
+    group:"整形外科",
+    unit:"米秝琪整形外科診所",
+    title:"院長",
+    bio:"我是黃琪琛 整形外科 專科醫師 擅長身體雕塑 五官美感設計 喜歡美的事物, 追求自然耐看的美感, 喜歡高爾夫 旅遊 體驗不同的活動與生活模式",
+    products:"用品 保養品 保健食品",
+    dream:"Malbon , PP",
+    fb:"https://www.facebook.com/DrHuangtheArtist",
+    ig:"https://www.instagram.com/miraclecraftman/",
+    other:"https://www.youtube.com/@%E9%9A%86%E4%B9%B3%E9%AB%94%E9%9B%95%E9%BB%83%E7%90%AA%E7%90%9B%E9%86%AB%E5%B8%AB",
+    card:""
+  },
+  {
+    name:"林玉羚",
+    dept:"全科牙醫師",
+    group:"牙科",
+    unit:"台中西屯 卓越美學牙醫診所",
+    title:"牙醫師",
+    bio:"嗨👋我是林玉羚醫師\n是個講究細節與極致美感的天秤座牙醫師\n所以牙齒美白、齒顎矯正、美學全瓷是我最享受的事情\n我有個特殊技能，投資精準買在高點，只好努力看診攤平虧損。",
+    products:"牙齒牙醫相關用品、命理面相X齒顎矯正、美妝飾品X美容牙科、保健食品、護手霜洗手乳、香氛、醫師袍",
+    dream:"飛利浦、Aesop",
+    fb:"https://www.facebook.com/share/1CgYrHAXbB/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/rgfuajaiuk?igsh=MWtpaXVjd2F6NjJ5bw%3D%3D&utm_source=qr",
+    other:"https://www.threads.com/@rgfuajaiuk?igshid=NTc4MTIwNjQ2YQ==",
+    card:"https://taplink.cc/drlinyuling"
+  },
+  {
+    name:"葉艾芸",
+    dept:"醫美/家醫/肥胖專科",
+    group:"整形外科",
+    unit:"京萃美學診所",
+    title:"院長",
+    bio:"我是小艾醫師葉艾芸，專注自然系抗老與高質感醫美。擅長將專業轉化為易懂且具信任感的內容，結合臨床經驗與個人品牌影響力，精準觸及高端女性族群。透過真實體驗與細膩表達，不僅提升產品信任度，也能有效轉化為實際消費與長期品牌認同。",
+    products:"醫學美容護膚產品、按摩用品、美妝時尚",
+    dream:"Chanel,Dior（時尚香氛品牌）、理膚寶水、妮維雅",
+    fb:"https://www.facebook.com/share/1cpbjhKazK/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/doctor_ireneyeh?igsh=dG1nNndiMTFiOGx5&utm_source=qr",
+    other:"",
+    card:""
+  },
+  {
+    name:"王仁昌",
+    dept:"疼痛科",
+    group:"復健／骨科",
+    unit:"聯弘診所",
+    title:"院長",
+    bio:"疼痛醫學、再生醫學",
+    products:"皆可",
+    dream:"皆可",
+    fb:"https://www.facebook.com/share/18HMYzjQyF/?mibextid=wwXIfr",
+    ig:"https://www.instagram.com/lian_hong2025?igsh=cXpoa3NyZXRlOXgw",
+    other:"https://www.threads.com/@lian_hong2025?igshid=NTc4MTIwNjQ2YQ==",
+    card:""
+  },
+  {
+    name:"劉立德",
+    dept:"牙科",
+    group:"牙科",
+    unit:"日三牙醫體系 晶睿牙醫",
+    title:"日三牙醫體系共同創辦人  晶睿牙醫院長",
+    bio:"劉立德醫師 — 用心呵護你的每一顆牙齒\n\n您好，我是劉立德醫師，從事牙科植牙與牙周病治療多年，深知牙齒對我們生活的重要性。無論是一顆牙還是整口牙的修復，我都希望能用最專業的技術和最溫暖的態度，幫助您找回健康與自信的笑容。\n\n我致力於結合最新的數位科技與舒眠植牙技術，讓治療過程更精準、更舒適，減少您的不安和疼痛。每一位來到診所的朋友，我都會耐心傾聽您的需求，仔細說明治療步驟，陪伴您走過整個療程。\n\n我相信，牙齒不只是咀嚼的工具，更承載著情感與回憶。無論您是初次植牙，還是遇到複雜的牙周問題，我都會盡力用心為您打造最適合您的方案，讓您的笑容更美好，也更持久。\n\n歡迎您來找我聊聊，讓我們一起守護您的口腔健康，讓笑容再次綻放自信與光彩。",
+    products:"牙膏 牙刷 牙線 牙科用品",
+    dream:"職棒球員媒介 運動員護牙套",
+    fb:"https://www.facebook.com/DrLeaderLiu/",
+    ig:"https://www.instagram.com/drleaderliu?igsh=MWx6NDRmbmd2aW9rMg==",
+    other:"",
+    card:""
+  }
+];
+
+// Dept display order
+const DEPT_ORDER = [
+  '耳鼻喉科','中醫科','皮膚科','小兒科','家庭醫學科','新陳代謝／內分泌科',
+  '復健／骨科','牙科','婦產科','泌尿科','消化內科','胸腔內科',
+  '整形外科','神經科','腎臟科','身心科','藥師','心臟血管外科',
+  '放射腫瘤科','眼科','急診科','高齡醫學科'
+];
+
+// Deduplicate by name+unit (keep last, fuller submission)
+function dedup(arr) {
+  const map = new Map();
+  arr.forEach(d => {
+    const key = d.name.trim();
+    const prev = map.get(key);
+    // Prefer entry with longer bio or more links
+    if (!prev) { map.set(key, d); return; }
+    const score = s => (s.bio.length + s.products.length + s.dream.length + (s.fb?5:0) + (s.ig?5:0) + (s.card?5:0));
+    if (score(d) > score(prev)) map.set(key, d);
+  });
+  return [...map.values()];
+}
+
+const ALL = DOCTORS; // keep all 106 for display (some are updates)
+// actually show all, just use dedup for duplicates where name is identical
+const UNIQUE = dedup(ALL);
+
+function initials(name) {
+  const clean = name.replace(/（.*?）/g,'').replace(/\(.*?\)/g,'').trim();
+  return clean.charAt(0);
+}
+
+function buildTags() {
+  const groups = [...new Set(UNIQUE.map(d => d.group))];
+  const ordered = DEPT_ORDER.filter(g => groups.includes(g));
+  groups.forEach(g => { if (!ordered.includes(g)) ordered.push(g); });
+
+  const container = document.getElementById('filterTags');
+  const all = document.createElement('button');
+  all.className = 'ftag active';
+  all.dataset.g = 'all';
+  all.textContent = `全部 ${UNIQUE.length}`;
+  all.onclick = () => filter('all');
+  container.appendChild(all);
+
+  ordered.forEach(g => {
+    const cnt = UNIQUE.filter(d => d.group === g).length;
+    const btn = document.createElement('button');
+    btn.className = 'ftag';
+    btn.dataset.g = g;
+    btn.textContent = `${g} ${cnt}`;
+    btn.onclick = () => filter(g);
+    container.appendChild(btn);
+  });
+}
+
+function buildCard(d) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.name = d.name;
+  card.dataset.unit = d.unit;
+  card.dataset.dept = d.group;
+  card.dataset.products = d.products;
+  card.dataset.bio = d.bio;
+
+  const links = [];
+  if (d.fb) links.push(`<a href="${d.fb}" class="lbtn fb" target="_blank">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook</a>`);
+  if (d.ig) links.push(`<a href="${d.ig}" class="lbtn ig" target="_blank">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>`);
+  if (d.other) links.push(`<a href="${d.other}" class="lbtn other" target="_blank">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>其他媒體</a>`);
+  if (d.card) links.push(`<a href="${d.card}" class="lbtn card-lbtn" target="_blank">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>電子名片</a>`);
+
+  card.innerHTML = `
+    <div>
+      <span class="card-name">${d.name}</span><span class="card-role-badge">醫師</span>
+    </div>
+    <div><span class="dept-tag">${d.dept || d.group}</span></div>
+    ${d.unit && d.unit.trim() !== d.name.trim() ? `<div class="card-unit">${d.unit}</div>` : ''}
+    <div class="card-title-text">${d.title}</div>
+    <hr class="card-divider">
+    ${d.bio ? `<div class="card-bio">${d.bio}</div>` : ''}
+    ${d.products ? `<div class="field-label">可接受合作項目</div><div class="field-value">${d.products}</div>` : ''}
+    ${d.dream ? `<div class="field-label">期待合作品牌</div><div class="dream-value">${d.dream}</div>` : ''}
+    ${links.length ? `<div class="card-links">${links.join('')}</div>` : ''}
+  `;
+  return card;
+}
+
+function buildContent(doctors) {
+  const main = document.getElementById('mainContent');
+  main.innerHTML = '';
+
+  if (!doctors.length) {
+    document.getElementById('noResult').classList.add('show');
+    return;
+  }
+  document.getElementById('noResult').classList.remove('show');
+
+  // Group
+  const groups = {};
+  doctors.forEach(d => {
+    if (!groups[d.group]) groups[d.group] = [];
+    groups[d.group].push(d);
+  });
+
+  const ordered = DEPT_ORDER.filter(g => groups[g]);
+  Object.keys(groups).forEach(g => { if (!ordered.includes(g)) ordered.push(g); });
+
+  ordered.forEach(g => {
+    const list = groups[g];
+    const block = document.createElement('div');
+    block.className = 'dept-block';
+    const h = document.createElement('div');
+    h.className = 'dept-heading';
+    h.innerHTML = `<h2>${g}</h2><span class="dept-cnt">${list.length} 位醫師</span>`;
+    block.appendChild(h);
+    const grid = document.createElement('div');
+    grid.className = 'cards-grid';
+    list.forEach(d => grid.appendChild(buildCard(d)));
+    block.appendChild(grid);
+    main.appendChild(block);
+  });
+}
+
+let currentGroup = 'all';
+let currentSearch = '';
+
+function filter(group) {
+  currentGroup = group;
+  document.querySelectorAll('.ftag').forEach(b => {
+    b.classList.toggle('active', b.dataset.g === group);
+  });
+  applyFilter();
+}
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  currentSearch = e.target.value.trim().toLowerCase();
+  applyFilter();
+});
+
+function applyFilter() {
+  let list = UNIQUE;
+  if (currentGroup !== 'all') list = list.filter(d => d.group === currentGroup);
+  if (currentSearch) list = list.filter(d =>
+    d.name.toLowerCase().includes(currentSearch) ||
+    d.unit.toLowerCase().includes(currentSearch) ||
+    d.dept.toLowerCase().includes(currentSearch) ||
+    d.products.toLowerCase().includes(currentSearch) ||
+    d.bio.toLowerCase().includes(currentSearch)
+  );
+  buildContent(list);
+}
+
+buildTags();
+applyFilter();
+</script>
+</body>
+</html>
